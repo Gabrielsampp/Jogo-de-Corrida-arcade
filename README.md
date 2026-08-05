@@ -1,4 +1,3 @@
-# Jogo-de-Corrida-arcade
 # 🏎️ Jogo de Corrida Arcade
 
 Este projeto consiste no desenvolvimento de um **jogo de corrida no estilo arcade**, proporcionando uma experiência dinâmica, divertida e desafiadora para os jogadores. O foco principal é oferecer uma jogabilidade fluida, com mecânicas simples e envolventes, inspiradas nos clássicos jogos de corrida arcade.
@@ -18,4 +17,5 @@ Para facilitar a administração da aplicação, foi desenvolvido um **painel de
 ## 🎯 Objetivo
 
 O objetivo deste projeto é aplicar conceitos de desenvolvimento de software e programação de jogos, integrando mecânicas de entretenimento com funcionalidades administrativas em uma única aplicação, proporcionando uma solução completa tanto para os jogadores quanto para os administradores do sistema.
+
 
