@@ -1,0 +1,1 @@
+from Entidades.Jogador.delete import delete

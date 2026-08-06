@@ -1,0 +1,10 @@
+{
+    "jogadores": [
+        {
+            "nickname": "teste1",
+            "senha": "123",
+            "melhor_pontuacao": 0,
+            "pistas": []
+        }
+    ]
+}
