@@ -1,21 +1,152 @@
 # 🏎️ Jogo de Corrida Arcade
 
-Este projeto consiste no desenvolvimento de um **jogo de corrida no estilo arcade**, proporcionando uma experiência dinâmica e intuitiva, divertida e desafiadora para os jogadores. O foco principal é oferecer uma jogabilidade fluida, com mecânicas simples e envolventes, inspiradas nos clássicos jogos de corrida arcade.
+> **Projeto Final - Introdução à Programação (2026.1)**  
+> Um jogo de corrida estilo arcade com geração infinita de pistas, criação customizada de cenários, ranking global e sistema completo de gerenciamento via terminal.
 
-Além da experiência do jogador, o projeto também integra um **sistema de ranking**, permitindo registrar e exibir as melhores pontuações no ranking, incentivando a competição entre os participantes.
+---
 
-Para facilitar a administração da aplicação, foi desenvolvido um **painel de gerenciamento**, onde administradores podem gerenciar informações do sistema, acompanhar dados do jogo e realizar operações de controle conforme as necessidades do projeto.
+## 📌 Sumário
+- [Sobre o Projeto](#-sobre-o-projeto)
+- [Funcionalidades Principais](#-funcionalidades-principais)
+- [Tecnologias Utilizadas](#-tecnologias-utilizadas)
+- [Estrutura do Projeto](#-estrutura-do-projeto)
+- [Modelagem de Dados (Entidades)](#-modelagem-de-dados-entidades)
+- [Equipe de Desenvolvimento](#-equipe-de-desenvolvimento)
+- [Como Executar](#-como-executar)
 
-## ✨ Funcionalidades
+---
 
-* 🎮 Jogabilidade no estilo corrida arcade.
-* 🏆 Sistema de ranking com registro das melhores pontuações.
-* 👤 Painel administrativo para gerenciamento do sistema.
-* 📊 Organização e controle de dados relacionados ao jogo.
-* ⚡ Interface intuitiva e foco na experiência do usuário.
+## 🎯 Sobre o Projeto
 
-## 🎯 Objetivo
+### O Problema
+Criar uma comunidade em torno de um jogo de corrida arcade simples e divertido, permitindo que jogadores compitam em rankings gerais, personalizem e compartilhem suas próprias pistas, mantendo o ambiente organizado através de uma curadoria/gerenciamento administrativo restrito.
 
-O objetivo deste projeto é aplicar conceitos de desenvolvimento de software e programação de jogos, integrando mecânicas de entretenimento com funcionalidades administrativas em uma única aplicação, proporcionando uma solução completa tanto para os jogadores quanto para os administradores do sistema.
+### O Jogo
+Desenvolvido com a biblioteca **Pygame**, o jogo desafia o jogador a pilotar e desviar de obstáculos e outros veículos na pista pelo maior tempo possível. 
+* **Pistas Infinitas:** Disposição aleatória de obstáculos.
+* **Bônus:** Power-ups e itens bônus surgem aleatoriamente ao longo da corrida.
+* **Estilo Visual:** Design retrô em *Pixel Art*.
+
+### Armazenamento e Persistência
+Todos os dados de usuários, pistas e rankings são mantidos através de **armazenamento estático em arquivos JSON**.
+
+---
+
+## 🚀 Funcionalidades Principais
+
+### 🎮 Interface do Jogo (Pygame)
+* **Tela Inicial:** Opção direta para dar `PLAY` no jogo.
+* **Tela de Corrida (Game Loop):**
+  * Controle do veículo do jogador.
+  * Lógica de pistas infinitas.
+  * Geração dinâmica de obstáculos e bônus.
+  * Detecção de colisão e cálculo/acúmulo de pontuação.
+* **Tela de Game Over:** Opção para recomeçar a partida ou acessar a tabela de ranking.
+* **Tela de Ranking:** Exibição dos melhores desempenhos salvos no arquivo `ranking.json`.
+* **Tela de Criação de Pistas:**
+  * Escolha de relevo (*Deserto*, *Asfalto*, *Antártida*, *Campos Verdes*).
+  * Configuração da quantidade de obstáculos e velocidade da pista.
+  * Seleção do carro do jogador.
+
+### 💻 Sistema no Terminal / CMD
+* **Menu Inicial:**
+  * Login de Jogador e Login de Admin.
+  * Cadastro de novo jogador.
+  * Consulta do ranking geral.
+  * Validação e tratamento de dados (`try/except`).
+* **Painel Administrativo:**
+  * Métricas em cabeçalho (total de entidades cadastradas).
+  * Buscar e remover jogadores ou pistas especificadas.
+  * Atualizar dados cadastrais do admin.
+* **Painel do Jogador:**
+  * Iniciar jogo escolhendo a pista desejada.
+  * Criar e personalizar pistas públicas ou privadas.
+  * Explorar pistas da comunidade e verificar histórico/resultados.
+  * Alteração de senha e dados cadastrais.
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+* **Linguagem:** Python 3.12.1
+* **Interface Gráfica do Jogo:** Biblioteca Pygame (https://pypi.org/project/pygame/)
+* **Customização do terminal:** Biblioteca Rich (https://pypi.org/project/rich/)
+* **Persistência de Dados:** Arquivos JSON
+
+---
+
+## 🏗️ Estrutura do Projeto
+
+O projeto adota uma arquitetura modularizada para facilitar a colaboração via Git:
+
+```text
+📂 Jogo-de-Corrida-arcade
+ ├── 📂 Entidades
+ │    ├── 📂 Jogador
+ │    │    ├── jogador.py
+ │    │    ├── create.py
+ │    │    ├── get_by_user_name.py
+ │    │    ├── get_all.py
+ │    │    ├── update.py
+ │    │    ├── delete.py
+ │    │    ├── validation.py
+ │    │    └── jogador.json
+ │    ├── 📂 Pista
+ │    │    ├── pista.py
+ │    │    ├── create.py
+ │    │    ├── get_all.py
+ │    │    ├── get_by_list_id.py
+ │    │    ├── get_publics.py
+ │    │    ├── update.py
+ │    │    ├── delete.py
+ │    │    └── pista.json
+ │    ├── 📂 Admin
+ │    │    ├── admin.py
+ │    │    ├── get.py
+ │    │    ├── update.py
+ │    │    ├── validation.py
+ │    │    └── admin.json
+ │    └── 📂 Ranking
+ │         ├── ranking.py
+ │         ├── get_all.py
+ │         ├── update.py
+ │         ├── delete.py
+ │         └── ranking.json
+```
+
+---
+
+
+## Modelagem de Dados (Entidades)
+
+* ### **Admin:** Terá controle sobre as entidades cadastradas, podendo excluí-los.
+
+* ### **Jogador:** quem poderá jogar de fato
+
+* ### **Pista:** customização de jogo.
+
+* ### **Ranking:** lista de todos os melhores desempenhos dos jogadores;
+
+---
+
+## Equipe de Desenvolvimento
+
+```
+
+Antônio Gabriel Sampaio | @Gabrielsampp
+
+Caio de Oliveira Ferreira Sá | @CaioOliveira-456
+
+Davi Henrique de Oliveira Maia  |  @davibr123
+
+José Alisson Dias Costa  |  @Alisson014
+
+Wanderson Francisco Lobo Almeida  |  @wandersonlobo
+
+Wellington Dantas Angelo  |  @Angel0ps
+
+```
+
+
 
 
