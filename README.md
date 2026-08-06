@@ -2,7 +2,7 @@
 
 Este projeto consiste no desenvolvimento de um **jogo de corrida no estilo arcade**, proporcionando uma experiência dinâmica e intuitiva, divertida e desafiadora para os jogadores. O foco principal é oferecer uma jogabilidade fluida, com mecânicas simples e envolventes, inspiradas nos clássicos jogos de corrida arcade.
 
-Além da experiência do jogador, o projeto também integra um **sistema de ranking**, permitindo registrar e exibir as melhores pontuações, incentivando a competição entre os participantes.
+Além da experiência do jogador, o projeto também integra um **sistema de ranking**, permitindo registrar e exibir as melhores pontuações no ranking, incentivando a competição entre os participantes.
 
 Para facilitar a administração da aplicação, foi desenvolvido um **painel de gerenciamento**, onde administradores podem gerenciar informações do sistema, acompanhar dados do jogo e realizar operações de controle conforme as necessidades do projeto.
 
