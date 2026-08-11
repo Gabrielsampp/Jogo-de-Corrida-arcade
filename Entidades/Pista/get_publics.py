@@ -1,7 +1,7 @@
 import json
 from pathlib import Path #A biblioteca path ajuda a localizar o arquivo json, mesmo que o programa seja executado em outro diretório.
 
-def get_publics(): #função que retorna todos os jogadores registrados no jogador.json
+def get_publics(): #função que retorna todos as pistas registradas no pista.json
     caminho = Path(__file__).parent / "pista.json"
 
     with open(caminho, "r", encoding="utf-8") as arquivo:

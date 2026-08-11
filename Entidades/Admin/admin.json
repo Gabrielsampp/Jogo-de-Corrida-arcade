@@ -1,4 +1,8 @@
-{
-    "nome_usuario": "admin",
-    "senha": "admin123"
-}
+  {
+  "admins": [
+            {
+                "nome_usuario": "admin1",
+                "senha": "admin123"
+            }
+        ]
+    }
