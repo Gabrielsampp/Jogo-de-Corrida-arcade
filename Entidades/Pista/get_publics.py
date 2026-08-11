@@ -7,4 +7,4 @@ def get_publics(): #função que retorna todos os jogadores registrados no jogad
     with open(caminho, "r", encoding="utf-8") as arquivo:
         dados = json.load(arquivo)
 
-    return [pista for pista in dados["pistas"] if pista["is_public"] == True]
+    return [pista for pista in dados["pistas"] if pista["is_public"] == True] #Retorna as pistas marcadas como "true" na opção "is_public"
