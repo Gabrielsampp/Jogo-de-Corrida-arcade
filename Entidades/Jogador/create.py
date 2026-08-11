@@ -1,3 +1,9 @@
+from get_by_user_name import get_by_username
+from pathlib import Path
+import json
+
+caminho = Path(__file__).parent / "jogador.json"
+
 def create(nickname,senha): 
     #validação do nickname
     Valid_nickname = False
@@ -18,8 +24,33 @@ def create(nickname,senha):
         Valid_senha = False
     else:
         Valid_senha = True
-    
-    
-nickname = input("Digite o nickname do jogador: ")
-senha = input("Digite a senha do jogador: ")
+
+    if Valid_nickname and Valid_senha:    
+        existencia = get_by_username(nickname)
+        if existencia != None:
+            return "Nickname já existe. Por favor, escolha outro."
+        else:
+            if not caminho.exists():
+                informacao = {"jogadores": []}
+            else:
+                with open(caminho, "r", encoding="utf-8") as arquivo:
+                    informacao = json.load(arquivo)
+
+            novo_jogador = {
+                "nickname": nickname,
+                "senha": senha,
+                "melhor_pontuacao": 0,
+                "pistas": [],
+            }
+            informacao["jogadores"].append(novo_jogador)
+            with open(caminho, "w", encoding="utf-8") as arquivo:
+                json.dump(informacao, arquivo, indent=4)
+
+            if get_by_username(nickname) is not None:
+                return "Jogador criado com sucesso!"
+            else:
+                return "Erro: jogador não foi salvo corretamente."
+    else:
+        return "Nickname ou senha inválidos. Por favor, tente novamente."
+
 print(create(nickname, senha))
