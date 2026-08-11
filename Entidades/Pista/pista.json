@@ -23,7 +23,7 @@
         {
             "id": 3,
             "nome": "mudei o nome 2",
-            "is_public": true,
+            "is_public": false,
             "tipo_de_relevo": "Campos verdes",
             "velocidade": 1,
             "quantidade_obstaculos": 1,
