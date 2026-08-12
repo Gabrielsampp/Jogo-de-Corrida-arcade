@@ -1,0 +1,17 @@
+{
+
+        "ranking": [
+        {       
+            "teste": 1,
+            "nome": "João",
+            "pontuação": 1000
+        }
+,
+         {
+            "teste": 2,
+            "nome": "maria",
+            "pontuação": 900
+        }
+    
+    
+    ]}
