@@ -1,12 +1,34 @@
-[
-    {
-        "id": 1,
-        "nome": "Pista Deserto",
-        "is_public": true,
-        "tipo_relevo": "deserto",
-        "velocidade": 1.5,
-        "quantidade_obstaculos": 10,
-        "melhor_desempenho": "",
-        "jogador_melhor_desempenho": ""
-    }
-]   
+{
+    "pistas": [
+        {
+            "id": 1,
+            "nome": "mudei o nome 2",
+            "is_public": true,
+            "tipo_de_relevo": "Campos verdes",
+            "velocidade": 1,
+            "quantidade_obstaculos": 1,
+            "melhor_desempenho": "1000",
+            "jogador_de_melhor_desempenho": "teste1"
+        },
+        {
+            "id": 2,
+            "nome": "mudei o nome 2",
+            "is_public": true,
+            "tipo_de_relevo": "Campos verdes",
+            "velocidade": 1,
+            "quantidade_obstaculos": 1,
+            "melhor_desempenho": "1000",
+            "jogador_de_melhor_desempenho": "teste1"
+        },
+        {
+            "id": 3,
+            "nome": "mudei o nome 2",
+            "is_public": false,
+            "tipo_de_relevo": "Campos verdes",
+            "velocidade": 1,
+            "quantidade_obstaculos": 1,
+            "melhor_desempenho": "1000",
+            "jogador_de_melhor_desempenho": "teste1"
+        }
+    ]
+}
