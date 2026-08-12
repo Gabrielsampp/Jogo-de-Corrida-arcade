@@ -12,6 +12,6 @@ def buscar_pistas_por_id (lista_ids):
 
     return pistas_encontradas
 
-lista_ids = [1, 2, 3]  # Exemplo de lista de IDs
+lista_ids = [1, 2]  # Exemplo de lista de IDs
 pistas_encontradas = buscar_pistas_por_id(lista_ids)
 print (pistas_encontradas)
