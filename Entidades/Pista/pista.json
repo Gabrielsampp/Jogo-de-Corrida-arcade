@@ -1,0 +1,12 @@
+[
+    {
+        "id": 1,
+        "nome": "Pista Deserto",
+        "is_public": true,
+        "tipo_relevo": "deserto",
+        "velocidade": 1.5,
+        "quantidade_obstaculos": 10,
+        "melhor_desempenho": "",
+        "jogador_melhor_desempenho": ""
+    }
+]   
