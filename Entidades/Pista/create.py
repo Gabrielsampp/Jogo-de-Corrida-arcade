@@ -31,7 +31,7 @@ def cadastrar_pista(
 
     # Gera um novo ID, usando a função importada do arquivo get_last_id.py.
 
-    ultimo = get_last_id(caminho_arquivo)
+    ultimo = get_last_id()
     novo_id = (ultimo if ultimo is not None else 0) + 1
 
     # Gera um dicionário com os novos dados da pista.
