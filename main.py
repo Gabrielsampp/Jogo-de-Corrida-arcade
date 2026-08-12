@@ -1,3 +1,3 @@
-from Entidades.Pista.get_publics import get_publics
+from Entidades.Jogador import jogador
 
-print(get_publics())
+print(jogador.login("teste1", "12o3"))
