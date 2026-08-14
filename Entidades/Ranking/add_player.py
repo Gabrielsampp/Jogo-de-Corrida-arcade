@@ -12,7 +12,7 @@ def add_player(nome, pontos):                               #função para adici
 
     for jogador in ranking:                              #verifica se o jogador já está no ranking
         if jogador["nome"] == nome: 
-            return False
+            return False, "Jogador já existe"
 
     novo_jogador = {                                          #se não estiver, cria um novo jogador 
         "nome": nome,
@@ -30,4 +30,4 @@ def add_player(nome, pontos):                               #função para adici
     with open(caminho, "w", encoding="utf-8") as arquivo:
         json.dump(dados, arquivo, indent=4, ensure_ascii=False)                     #adiciona o novo jogador ao ranking
 
-    return True
+    return True, "Jogador adicionado ao ranking"
