@@ -1,12 +1,12 @@
 #FUNÇÃO CREATE - PISTA
 
 import json
-import os
-from get_last_id import get_last_id  # Importa a função existente de get_last_id.py
+from pathlib import Path
+from get_last_id import get_last_id
 
-tipos_de_relevo = ["deserto", "asfalto", "antártida", "Campos verdes"] #uso básico de uma lista
+tipos_de_relevo = ["deserto", "asfalto", "antártida", "Campos verdes"] 
 
-def cadastrar_pista(                                       # Função para criar as pistas.
+def cadastrar_pista( #                                       FUNÇÃO PRINCIPAL
     nome: str,
     is_public: bool,
     tipo_relevo: list[str],
@@ -15,8 +15,7 @@ def cadastrar_pista(                                       # Função para criar
     cor: str,
     caminho_arquivo: str = "Entidades/Pista/pista.json"
 ):
-    
-    if isinstance(tipo_relevo, str):                         # Validação dos tipos de relevo                 
+    if isinstance(tipo_relevo, str): #                      Validação dos tipos de relevo                 
         if tipo_relevo not in tipos_de_relevo:
             return (False, f"Tipo de relevo inválido. Permitidos: {tipos_de_relevo}")
         
@@ -27,44 +26,40 @@ def cadastrar_pista(                                       # Função para criar
     else:
         return (False, "Formato do tipo de relevo é inválido.")
 
-    # Gera um novo ID, usando a função importada do arquivo get_last_id.py.
-
-    ultimo = get_last_id()
+    ultimo = get_last_id() #                                Elaboração de um novo ID
     novo_id = (ultimo if ultimo is not None else 0) + 1
 
-    # Gera um dicionário com os novos dados da pista.
-    nova_pista = {
+    nova_pista = { #                                        Novos dados da pista.
         "id": novo_id,
         "nome": nome,
         "is_public": bool(is_public),
         "tipo_de_relevo": tipo_relevo,
         "velocidade": float(velocidade),
-        "quantidade_obstaculos": int(qtd_obstaculos),
+        "quantidade_obstaculos": int(qtd_qtd_obstaculos if 'qtd_qtd_obstaculos' in locals() else qtd_obstaculos),
         "melhor_desempenho": "",
         "jogador_de_melhor_desempenho": "",
         "carro": str(cor)
     }
 
-    # Leitura e verificaçao dos novos dados no arquivo
-    try:
+    try: #                                                  Manipulação no arquivo
         dados = {"pistas": []}
+        caminho = Path(caminho_arquivo)
 
-        if os.path.exists(caminho_arquivo):
-            with open(caminho_arquivo, "r", encoding="utf-8") as arquivo:
-                conteudo = arquivo.read().strip()
+        # Leitura
+        if caminho.exists():
+            conteudo = caminho.read_text(encoding="utf-8").strip()
 
-                if conteudo:
-                    dados = json.loads(conteudo)
+            if conteudo:
+                dados = json.loads(conteudo)
 
-                    if "pistas" not in dados:
-                        dados["pistas"] = []
+                if "pistas" not in dados:
+                    dados["pistas"] = []
 
         dados["pistas"].append(nova_pista)
 
-    # Escrita dos novos dados no arquivo
-    
-        with open(caminho_arquivo, "w", encoding="utf-8") as arquivo:
-            json.dump(dados, arquivo, ensure_ascii=False, indent=4)
+        # Escrita
+        caminho.parent.mkdir(parents=True, exist_ok=True)
+        caminho.write_text(json.dumps(dados, ensure_ascii=False, indent=4), encoding="utf-8")
 
         return (True, f"Pista '{nome}' cadastrada com sucesso com o ID {novo_id}.")
 
