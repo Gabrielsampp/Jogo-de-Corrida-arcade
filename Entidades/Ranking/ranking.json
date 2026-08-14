@@ -1,15 +1,20 @@
 {
-
-        "ranking": [
-        {       
-           "nome": "joao",
-           "pontuação": 1000
-        }
-,
-         {
+    "ranking": [
+        {
+            "nome": "joao",
+            "pontos": 1000
+        },
+        {
+            "nome": "Caio_bonitao",
+            "pontos": 999
+        },
+        {
             "nome": "maria",
-            "pontuação": 900
+            "pontos": 900
+        },
+        {
+            "nome": "xXwandersonXx",
+            "pontos": 1
         }
-    
-    
-    ]}
+    ]
+}
