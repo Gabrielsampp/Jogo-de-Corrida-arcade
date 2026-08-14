@@ -1,5 +1,6 @@
 # TELA RANKING - PONTUAÇÃO
 
+
 import pygame
 
 from Entidades.Ranking.get_all import get_all
@@ -15,7 +16,7 @@ def tela_ranking(jogador, resultado): #             FUNÇÃO PRINCIPAL
     def carregar_top10():         # Função para carregar e ordenar o ranking
         dados = get_all()
         lista = dados.get("ranking", [])
-        lista.sort(key=lambda jogador: jogador["pontuação"], reverse=True)
+        lista.sort(key=lambda jogador: jogador["score"], reverse=True)
         return lista[:10]
       
     ranking = carregar_top10()    # lista do ranking               

@@ -9,7 +9,7 @@ tipos_de_relevo = ["deserto", "asfalto", "antártida", "Campos verdes"]
 def cadastrar_pista( #                                       FUNÇÃO PRINCIPAL
     nome: str,
     is_public: bool,
-    tipo_relevo: list[str],
+    tipo_relevo: str,
     velocidade: float,
     qtd_obstaculos: int,
     cor: str,
@@ -18,13 +18,6 @@ def cadastrar_pista( #                                       FUNÇÃO PRINCIPAL
     if isinstance(tipo_relevo, str): #                      Validação dos tipos de relevo                 
         if tipo_relevo not in tipos_de_relevo:
             return (False, f"Tipo de relevo inválido. Permitidos: {tipos_de_relevo}")
-        
-        tipo_relevo = [tipo_relevo]
-
-    elif isinstance(tipo_relevo, list):
-        if not tipo_relevo or not all(r in tipos_de_relevo for r in tipo_relevo):
-            return (False, f"Tipo de relevo inválido. Permitidos: {tipos_de_relevo}")
-        
     else:
         return (False, "Formato do tipo de relevo é inválido.")
 
