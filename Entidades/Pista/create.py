@@ -42,7 +42,7 @@ def cadastrar_pista( #                                       FUNÇÃO PRINCIPAL
             "quantidade_obstaculos": int(qtd_obstaculos),
             "melhor_desempenho": None,
             "jogador_de_melhor_desempenho": None,
-            "cor": str(cor)
+            "carro": str(cor)
         }
 
         dados = {"pistas": []}
