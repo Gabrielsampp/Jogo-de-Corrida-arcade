@@ -2,7 +2,7 @@
 
 import json
 import os
-from get_last_id import get_last_id  # Importa a função existente de get_last_id.py
+from .get_last_id import get_last_id  # Importa a função existente de get_last_id.py
 
 tipos_de_relevo = ["deserto", "asfalto", "antártida", "Campos verdes"] #uso básico de uma lista
 
