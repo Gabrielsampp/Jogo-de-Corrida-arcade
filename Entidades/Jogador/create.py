@@ -1,4 +1,4 @@
-from get_by_user_name import get_by_username
+from Entidades.Jogador.get_by_user_name import get_by_username
 from pathlib import Path
 import json
 
