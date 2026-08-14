@@ -21,7 +21,6 @@ def tela_ranking(jogador, resultado): #             FUNÇÃO PRINCIPAL
     ranking = carregar_top10()    # lista do ranking               
 
     #                                               ELEMENTO ESTÁTICOS
-
     # Textos 
     texto_titulo = fonte.render("RANKING - TOP 10", True, (255, 255, 255))
     texto_resultado = fonte.render(f"Seu resultado: {resultado}", True, (255, 255, 0))
@@ -36,11 +35,10 @@ def tela_ranking(jogador, resultado): #             FUNÇÃO PRINCIPAL
     while True: #                                   LAÇO DE EVENTOS
 
         for evento in pygame.event.get():
-
             if evento.type == pygame.QUIT:
                 pygame.quit()
                 return
-
+            
             if evento.type == pygame.MOUSEBUTTONDOWN and evento.button == 1: # registro de clique no botão esquedro
 
                 # Clique no Botão Adicionar Pontuação
@@ -52,7 +50,7 @@ def tela_ranking(jogador, resultado): #             FUNÇÃO PRINCIPAL
                 # Clique no Botão Voltar
                 if area_botao_voltar.collidepoint(evento.pos):
                     return "game_over"
-
+                
         #                                           ELEMENTOS NA TELA
         tela.fill((30, 30, 30))
 
@@ -69,7 +67,7 @@ def tela_ranking(jogador, resultado): #             FUNÇÃO PRINCIPAL
             )
             tela.blit(texto_jogador, (150, 80 + i * 35))
 
-        # Botão Salvar - Verde por padrão | Cinza se clicado
+        # Botão Adicionar - Verde por padrão | Cinza se clicado
         cor_botao_adicionar = (100, 100, 100) if pontuacao_ja_salva else (0, 150, 0)
         pygame.draw.rect(tela, cor_botao_adicionar, area_botao_adicionar)
         tela.blit(texto_adicionar, (115, 512))
