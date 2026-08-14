@@ -6,19 +6,17 @@ from get_last_id import get_last_id  # Importa a função existente de get_last_
 
 tipos_de_relevo = ["deserto", "asfalto", "antártida", "Campos verdes"] #uso básico de uma lista
 
-# Função para criar as pistas.
-
-def cadastrar_pista(
+def cadastrar_pista(                                       # Função para criar as pistas.
     nome: str,
     is_public: bool,
     tipo_relevo: list[str],
     velocidade: float,
     qtd_obstaculos: int,
-    caminho_arquivo: str = "Entidades/Pista/pista.json",
+    cor: str,
+    caminho_arquivo: str = "Entidades/Pista/pista.json"
 ):
-    # Validação dos tipos de relevo
-
-    if isinstance(tipo_relevo, str):
+    
+    if isinstance(tipo_relevo, str):                         # Validação dos tipos de relevo                 
         if tipo_relevo not in tipos_de_relevo:
             return (False, f"Tipo de relevo inválido. Permitidos: {tipos_de_relevo}")
         
@@ -43,7 +41,8 @@ def cadastrar_pista(
         "velocidade": float(velocidade),
         "quantidade_obstaculos": int(qtd_obstaculos),
         "melhor_desempenho": "",
-        "jogador_de_melhor_desempenho": ""
+        "jogador_de_melhor_desempenho": "",
+        "carro": str(cor)
     }
 
     # Leitura e verificaçao dos novos dados no arquivo
