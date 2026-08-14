@@ -2,43 +2,21 @@
 
 import json
 import os
+from .get_last_id import get_last_id  # Importa a função existente de get_last_id.py
 
 tipos_de_relevo = ["deserto", "asfalto", "antártida", "Campos verdes"] #uso básico de uma lista
 
-# Função para verificicar o útlimo ID - Necessário para criar uma nova pista.
-
-def ultimo_id(caminho_arquivo = "pista.json"): 
-    if not os.path.exists(caminho_arquivo): 
-        return 0
-
-    try: # Ler o arquvio, transforma em dicionário e busca a chave pistas.
-
-        with open(caminho_arquivo, "r", encoding="utf-8") as arquivo:
-            dados = json.load(arquivo)
-            pistas = dados.get("pistas", [])
-
-            if not pistas: 
-                return 0 
-            
-            return max(pista.get("id", 0) for pista in pistas) #verifica o maior id das pistas e devolve como retorno da função.
-        
-    except (json.JSONDecodeError, Exception):
-        return 0
-
-# Função para criar as pistas.
-
-def cadastrar_pista(
+def cadastrar_pista(                                       # Função para criar as pistas.
     nome: str,
     is_public: bool,
     tipo_relevo: list[str],
     velocidade: float,
     qtd_obstaculos: int,
-    caminho_arquivo: str = "pista.json",
+    cor: str,
+    caminho_arquivo: str = "Entidades/Pista/pista.json"
 ):
-
-    # Validação dos tipos de relevo
-
-    if isinstance(tipo_relevo, str):
+    
+    if isinstance(tipo_relevo, str):                         # Validação dos tipos de relevo                 
         if tipo_relevo not in tipos_de_relevo:
             return (False, f"Tipo de relevo inválido. Permitidos: {tipos_de_relevo}")
         
@@ -49,8 +27,10 @@ def cadastrar_pista(
     else:
         return (False, "Formato do tipo de relevo é inválido.")
 
-    # Gera um novo ID, com base no último existente.
-    novo_id = ultimo_id(caminho_arquivo) + 1
+    # Gera um novo ID, usando a função importada do arquivo get_last_id.py.
+
+    ultimo = get_last_id()
+    novo_id = (ultimo if ultimo is not None else 0) + 1
 
     # Gera um dicionário com os novos dados da pista.
     nova_pista = {
@@ -61,7 +41,8 @@ def cadastrar_pista(
         "velocidade": float(velocidade),
         "quantidade_obstaculos": int(qtd_obstaculos),
         "melhor_desempenho": "",
-        "jogador_de_melhor_desempenho": ""
+        "jogador_de_melhor_desempenho": "",
+        "carro": str(cor)
     }
 
     # Leitura e verificaçao dos novos dados no arquivo
