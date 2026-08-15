@@ -1,4 +1,5 @@
 import pygame
+import sys 
 
 def coletar_dados_terminal():
     """Coleta as entradas iniciais obrigatórias via console."""
@@ -32,7 +33,7 @@ def tela_pista(create):
 
     # 2. Inicialização do ambiente gráfico
     pygame.init()
-    LARGURA, ALTURA = 576, 1024
+    LARGURA, ALTURA = 500, 700
     tela = pygame.display.set_mode((LARGURA, ALTURA))
     pygame.display.set_caption("Selecionar Pista")
     
@@ -50,25 +51,38 @@ def tela_pista(create):
     relevo_selecionada = None       # Receberá a string do tipo de relevo selecionado
     sala_publica = True            # Controle lógico: Pública (True) ou Privada (False)
 
-    # 4. Mapeamento dos retângulos invisíveis de colisão (Layout exato da imagem)
+    # 4. Mapeamento dos retângulos invisíveis de colisão
+    # As coordenadas originais foram desenhadas para uma imagem de 576x1024;
+    # aqui são reescaladas proporcionalmente para a resolução atual (500x700).
+    ESCALA_X = LARGURA / 576
+    ESCALA_Y = ALTURA / 1024
+
+    def rect_escalado(x, y, w, h):
+        return pygame.Rect(
+            round(x * ESCALA_X),
+            round(y * ESCALA_Y),
+            round(w * ESCALA_X),
+            round(h * ESCALA_Y)
+        )
+
     botoes_carros = {
-        "roxo":     pygame.Rect(75,  140,  70, 115),
-        "azul":     pygame.Rect(155, 140,  70, 115),
-        "verde":    pygame.Rect(238, 140,  70, 115),
-        "amarelo":  pygame.Rect(320, 140,  70, 115),
-        "vermelho": pygame.Rect(402, 140,  70, 115)
+        "roxo":     rect_escalado(65,  140,  80, 128),
+        "azul":     rect_escalado(157, 140,  80, 128),
+        "verde":    rect_escalado(248, 140,  80, 128),
+        "amarelo":  rect_escalado(339, 140,  80, 128),
+        "vermelho": rect_escalado(432, 140,  80, 128)
     }
 
     botoes_pistas = {
-        "Campos verdes": pygame.Rect(72, 280, 432, 138),  # Faixa Pista 1
-        "deserto":       pygame.Rect(72, 426, 432, 138),  # Faixa Pista 2
-        "antártida":     pygame.Rect(72, 572, 432, 138),  # Faixa Pista 3
-        "asfalto":       pygame.Rect(72, 718, 432, 138)   # Faixa Pista 4
+        "Campos verdes": rect_escalado(72, 280, 432, 138),  # Faixa Pista 1
+        "deserto":       rect_escalado(72, 426, 432, 138),  # Faixa Pista 2
+        "antártida":     rect_escalado(72, 572, 432, 138),  # Faixa Pista 3
+        "asfalto":       rect_escalado(72, 718, 432, 138)   # Faixa Pista 4
     }
 
-    btn_publica = pygame.Rect(95,  865, 180, 45)
-    btn_privada = pygame.Rect(298, 865, 180, 45)
-    btn_criar_sala = pygame.Rect(95, 922, 385, 60)
+    btn_publica = rect_escalado(95,  865, 180, 45)
+    btn_privada = rect_escalado(298, 865, 180, 45)
+    btn_criar_sala = rect_escalado(95, 922, 385, 60)
 
     # Configuração visual das bordas vazadas (Cores em RGB)
     COR_HOVER = (0, 255, 255)       # Ciano quando passa o mouse por cima
@@ -164,3 +178,10 @@ def tela_pista(create):
         clock.tick(60)
 
     pygame.quit()
+
+if __name__ == "__main__":
+    def create_teste(**kwargs):
+        print("Dados recebidos:", kwargs)
+        return True, "Sala criada com sucesso (teste)"
+
+    tela_pista(create_teste)
