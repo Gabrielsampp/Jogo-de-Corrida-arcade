@@ -1,0 +1,73 @@
+{
+    "pistas": [
+        {
+            "id": 1,
+            "nome": "mudei o nome 2",
+            "is_public": true,
+            "tipo_de_relevo": "Campos verdes",
+            "velocidade": 1,
+            "quantidade_obstaculos": 1,
+            "melhor_desempenho": "1000",
+            "jogador_de_melhor_desempenho": "teste1"
+        },
+        {
+            "id": 2,
+            "nome": "mudei o nome 2",
+            "is_public": true,
+            "tipo_de_relevo": "Campos verdes",
+            "velocidade": 1,
+            "quantidade_obstaculos": 1,
+            "melhor_desempenho": "1000",
+            "jogador_de_melhor_desempenho": "teste1"
+        },
+        {
+            "id": 3,
+            "nome": "mudei o nome 2",
+            "is_public": false,
+            "tipo_de_relevo": "Campos verdes",
+            "velocidade": 1,
+            "quantidade_obstaculos": 1,
+            "melhor_desempenho": "1000",
+            "jogador_de_melhor_desempenho": "teste1"
+        },
+        {
+            "id": 4,
+            "nome": "oi",
+            "is_public": true,
+            "tipo_de_relevo": [
+                "Campos verdes"
+            ],
+            "velocidade": 23.0,
+            "quantidade_obstaculos": 2,
+            "melhor_desempenho": "",
+            "jogador_de_melhor_desempenho": "",
+            "carro": "verde"
+        },
+        {
+            "id": 5,
+            "nome": "caio da de costa",
+            "is_public": false,
+            "tipo_de_relevo": [
+                "Campos verdes"
+            ],
+            "velocidade": 13.0,
+            "quantidade_obstaculos": 13,
+            "melhor_desempenho": "",
+            "jogador_de_melhor_desempenho": "",
+            "carro": "roxo"
+        },
+        {
+            "id": 6,
+            "nome": "gay",
+            "is_public": true,
+            "tipo_de_relevo": [
+                "Campos verdes"
+            ],
+            "velocidade": 23.0,
+            "quantidade_obstaculos": 22,
+            "melhor_desempenho": "",
+            "jogador_de_melhor_desempenho": "",
+            "carro": "azul"
+        }
+    ]
+}

@@ -1,4 +1,4 @@
-from get_by_user_name import get_by_username
+from Entidades.Jogador.get_by_user_name import get_by_username
 from pathlib import Path
 import json
 
@@ -54,4 +54,4 @@ def create(nickname,senha):
     else: #Caso o nickname ou a senha sejam inválidos, retorna uma mensagem de erro
         return "Nickname ou senha inválidos. Por favor, tente novamente."
 
-print(create(nickname, senha))
+# print(create(nickname, senha))

@@ -112,6 +112,21 @@ O projeto adota uma arquitetura modularizada para facilitar a colaboração via 
  │         ├── update.py
  │         ├── delete.py
  │         └── ranking.json
+ ├── 📂 Imagens
+ ├── 📂 Jogo
+ |    ├── jogo.py
+ |    ├── tela_game_over.py
+ |    ├── tela_inicial.py
+ |    ├── tela_pista.py
+ |    ├── tela_principal.py
+ |    ├── tela_ranking.py
+ ├── 📂 Sistema
+ |    ├── menu_inicial.py
+ |    ├── sistema_admin.py
+ |    ├── sistema_jogador.py
+ |    ├── sistema.py
+ |    ├── validar_jogador.py
+ ├── main.py  
 ```
 
 ---
