@@ -1,20 +1,20 @@
 {
     "ranking": [
         {
-            "nome": "joao",
-            "pontos": 1000
+            "nickname": "joao",
+            "score": 1000
         },
         {
-            "nome": "Caio_bonitao",
-            "pontos": 999
+            "nickname": "Caio_bonitao",
+            "score": 999
         },
         {
-            "nome": "maria",
-            "pontos": 900
+            "nickname": "maria",
+            "score": 900
         },
         {
-            "nome": "xXwandersonXx",
-            "pontos": 1
+            "nickname": "xXwandersonXx",
+            "score": 1
         }
     ]
 }
