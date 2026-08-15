@@ -1,6 +1,7 @@
 
 import pygame
 from pygame.locals import *
+from random import randint
 import sys
 
 from Jogo.tela_game_over import tela_game_over
@@ -34,7 +35,7 @@ PISTA_DEFAULT = {
     "is_public": True,
     "tipo_de_relevo": "Campos verdes",
     "velocidade": 1,
-    "quantidade_obstaculos": 1,
+    "quantidade_obstaculos": 6,
     "melhor_desempenho": 1000,
     "jogador_de_melhor_desempenho": "teste1", 
     "carro": "azul"
@@ -49,7 +50,7 @@ def tela_principal( pista=PISTA_DEFAULT ):
 
     bgs_pista = get_images.get_bg_pista(pista["tipo_de_relevo"])
     carro = get_images.get_carro(pista["carro"])
-    obstaculos = get_images.get_obstaculos(pista["quantidade_obstaculos"])
+    obstaculos_paths = get_images.get_obstaculos(pista["quantidade_obstaculos"])
 
     # Imagens
     # --- Pista
@@ -63,23 +64,58 @@ def tela_principal( pista=PISTA_DEFAULT ):
     CARRO_PLAYER = pygame.image.load(carro).convert_alpha() # Mantém fundo transparente
     CARRO_PLAYER = pygame.transform.scale(CARRO_PLAYER, (L_CARRO, A_CARRO))
 
-
     # Velocidade
-    velocidade = 2
+    velocidade = 3
 
     # Posições
     Y_PISTA_1 = 0
     Y_PISTA_2 = -ALTURA
 
+    BORDA_ESQUERDA = 130
+    BORDA_DIREITA = 340
+
     XY_CARRO_PLAYER = [LARGURA//2, ALTURA-100]
+    CARRO_PLAYER_RECT = CARRO_PLAYER.get_rect(center=XY_CARRO_PLAYER)
+
+
+    # Obstáculos
+    OBSTACULOS = []
+    obstaculo = {}
+
+    image = pygame.image.load(obstaculos_paths[0]).convert_alpha()
+    image = pygame.transform.scale(image, (L_CARRO, A_CARRO))
+
+    obstaculo["image"] = image
+    obstaculo["rect"] = image.get_rect(center=(randint(BORDA_ESQUERDA, BORDA_DIREITA), -50))
+
+    OBSTACULOS.append(obstaculo)
+
+    for obs in obstaculos_paths[1:]:
+        obstaculo = {}
+        image = pygame.image.load(obs).convert_alpha()
+        image = pygame.transform.scale(image, (L_CARRO, A_CARRO))
+
+        obstaculo["image"] = image
+        obstaculo["rect"] = image.get_rect(center=(randint(BORDA_ESQUERDA, BORDA_DIREITA), OBSTACULOS[-1]["rect"].y-180))
+        OBSTACULOS.append(obstaculo)
     
     while running:
-        velocidade += 0.0001
+        velocidade += 0.001
         TELA.blit(BG_IMAGE1, (0,Y_PISTA_1))
         TELA.blit(BG_IMAGE2, (0,Y_PISTA_2))
 
         Y_PISTA_1 += velocidade
         Y_PISTA_2 += velocidade
+
+
+        # Loop infinito dos obstáculos
+        for obs in OBSTACULOS:
+            obs["rect"].y += velocidade
+
+            if obs["rect"].y >= ALTURA:
+                obs["rect"].y = -180
+                obs["rect"].x = randint(BORDA_ESQUERDA, BORDA_DIREITA)
+
 
         # Loop infinito da pista
         if Y_PISTA_1 >= ALTURA:
@@ -87,6 +123,7 @@ def tela_principal( pista=PISTA_DEFAULT ):
 
         if Y_PISTA_2 >= ALTURA:
             Y_PISTA_2 = - ALTURA
+
 
         # Eventos de entrada
         for event in pygame.event.get():
@@ -113,25 +150,31 @@ def tela_principal( pista=PISTA_DEFAULT ):
         teclas =  pygame.key.get_pressed()
         # Movimentação horizontal
         if teclas[K_a] or teclas[K_LEFT]:      # Movimenta o player para a esquerda
-            if XY_CARRO_PLAYER[0] > 150:
-                XY_CARRO_PLAYER[0] -= velocidade 
+            if CARRO_PLAYER_RECT.x > BORDA_ESQUERDA:
+                CARRO_PLAYER_RECT.x -= velocidade 
 
         if teclas[K_d] or teclas[K_RIGHT]:      # Movimenta o player para a direita
-            if XY_CARRO_PLAYER[0] < 360:
-                XY_CARRO_PLAYER[0] += velocidade 
+            if CARRO_PLAYER_RECT.x < BORDA_DIREITA:
+                CARRO_PLAYER_RECT.x += velocidade 
 
         # Movimentação vertical
         if teclas[K_w] or teclas[K_UP]:      # Movimenta o player para a esquerda
-            if XY_CARRO_PLAYER[1] > 0:
-                XY_CARRO_PLAYER[1] -= velocidade 
+            if CARRO_PLAYER_RECT.y > 0:
+                CARRO_PLAYER_RECT.y -= velocidade 
 
         if teclas[K_s] or teclas[K_DOWN]:      # Movimenta o player para a direita
-            if XY_CARRO_PLAYER[1] < ALTURA:
-                XY_CARRO_PLAYER[1] += velocidade 
+            if CARRO_PLAYER_RECT.y < ALTURA - A_CARRO:
+                CARRO_PLAYER_RECT.y += velocidade 
 
-        CARRO_PLAYER_RECT = CARRO_PLAYER.get_rect(center=XY_CARRO_PLAYER)
 
+        # Player na tela
         TELA.blit(CARRO_PLAYER, CARRO_PLAYER_RECT)
+
+
+        # Obstáculos na tela
+        for obs in OBSTACULOS:
+            TELA.blit(obs["image"], obs["rect"])
+
 
 
         pygame.display.flip()
