@@ -1,22 +1,21 @@
 # TELA RANKING - PONTUAÇÃO
 
-
 import pygame
 
 from Entidades.Ranking.get_all import get_all
-from Entidades.Ranking.update import update
+# from Entidades.Ranking.update import update
 
 
-def tela_ranking(jogador, resultado): #             FUNÇÃO PRINCIPAL
+def tela_ranking(tela, jogador, resultado): #             FUNÇÃO PRINCIPAL
 
-    tela = pygame.display.set_mode((800, 600)) 
+    # tela = pygame.display.set_mode((800, 600)) 
     fonte = pygame.font.Font(None, 22)
     relogio = pygame.time.Clock() # Limita o FPS
 
     def carregar_top10():         # Função para carregar e ordenar o ranking
-        dados = get_all()
-        lista = dados.get("ranking", [])
-        lista.sort(key=lambda jogador: jogador["score"], reverse=True)
+        lista = get_all()
+        # lista = dados.get("ranking", [])
+        # lista.sort(key=lambda jogador: jogador["pontuação"], reverse=True)
         return lista[:10]
       
     ranking = carregar_top10()    # lista do ranking               
@@ -44,7 +43,7 @@ def tela_ranking(jogador, resultado): #             FUNÇÃO PRINCIPAL
 
                 # Clique no Botão Adicionar Pontuação
                 if area_botao_adicionar.collidepoint(evento.pos) and not pontuacao_ja_salva:
-                    update(jogador, resultado)
+                    # update(jogador, resultado)
                     ranking = carregar_top10()
                     pontuacao_ja_salva = True
 
@@ -62,7 +61,7 @@ def tela_ranking(jogador, resultado): #             FUNÇÃO PRINCIPAL
         # Lista do Top 10 Jogadores
         for i, jogador_ranking in enumerate(ranking):
             texto_jogador = fonte.render(
-                f"{i + 1}º - {jogador_ranking['nome']} - {jogador_ranking['pontuação']}",
+                f"{i + 1}º - {jogador_ranking['nome']} - {jogador_ranking['pontos']}",
                 True,
                 (255, 255, 255)
             )
