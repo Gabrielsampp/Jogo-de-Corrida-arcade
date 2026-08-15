@@ -12,4 +12,4 @@ def get_last_id():
         return data["pistas"][-1]["id"]
 
     except:
-        return None
+        return 0
