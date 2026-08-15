@@ -111,6 +111,7 @@ def tela_principal( pista=PISTA_DEFAULT ):
                             tela_inicial(TELA)
 
         teclas =  pygame.key.get_pressed()
+        # Movimentação horizontal
         if teclas[K_a] or teclas[K_LEFT]:      # Movimenta o player para a esquerda
             if XY_CARRO_PLAYER[0] > 150:
                 XY_CARRO_PLAYER[0] -= velocidade 
@@ -118,6 +119,15 @@ def tela_principal( pista=PISTA_DEFAULT ):
         if teclas[K_d] or teclas[K_RIGHT]:      # Movimenta o player para a direita
             if XY_CARRO_PLAYER[0] < 360:
                 XY_CARRO_PLAYER[0] += velocidade 
+
+        # Movimentação vertical
+        if teclas[K_w] or teclas[K_UP]:      # Movimenta o player para a esquerda
+            if XY_CARRO_PLAYER[1] > 0:
+                XY_CARRO_PLAYER[1] -= velocidade 
+
+        if teclas[K_s] or teclas[K_DOWN]:      # Movimenta o player para a direita
+            if XY_CARRO_PLAYER[1] < ALTURA:
+                XY_CARRO_PLAYER[1] += velocidade 
 
         CARRO_PLAYER_RECT = CARRO_PLAYER.get_rect(center=XY_CARRO_PLAYER)
 
