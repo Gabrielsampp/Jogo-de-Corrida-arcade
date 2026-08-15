@@ -46,7 +46,12 @@ def get_obstaculos(qtd: int) -> list[Path]:
     if not todas_imagens:
         raise FileNotFoundError(f"Nenhuma imagem encontrada em {pasta_obstaculos}")
 
-    # Sorteia 'qtd' imagens da lista de disponíveis (pode repetir se qtd > tamanho)
-    obstaculos_escolhidos = random.choices(todas_imagens, k=qtd)
+    if qtd > len(todas_imagens):
+        # Sorteia 'qtd' imagens da lista de disponíveis (pode repetir se qtd > tamanho)
+        obstaculos_escolhidos = random.sample(todas_imagens, k=len(todas_imagens))
+
+        obstaculos_escolhidos.extend(random.choices(todas_imagens, k=qtd-len(todas_imagens)))
+    else:
+        obstaculos_escolhidos = random.sample(todas_imagens, k=qtd)
 
     return obstaculos_escolhidos
