@@ -47,8 +47,8 @@ def cadastrar_pista(
             "tipo_de_relevo": tipo_relevo,
             "velocidade": float(velocidade),
             "quantidade_obstaculos": int(qtd_obstaculos),
-            "melhor_desempenho": None,
-            "jogador_de_melhor_desempenho": None,
+            "melhor_desempenho": 0,
+            "jogador_de_melhor_desempenho": "",
             "carro": str(cor)
         }
         
