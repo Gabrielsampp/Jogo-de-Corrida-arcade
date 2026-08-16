@@ -226,8 +226,8 @@ def tela_principal( pista=PISTA_DEFAULT, jogador="teste1" ):
                 
 
                 while res != "jogar_novamente" and res != "sair":
-                    # tela_ranking(TELA, "jfijowaof", 1000)
-                    tela_ranking(TELA)
+                    tela_ranking(TELA, jogador=jogador, resultado=PONTOS)
+                    # tela_ranking(TELA)
                     res = tela_game_over(tela=TELA, melhor_pontuacao="1000", pontuacao=PONTOS, tempo_total=1000)
 
                 match res:
