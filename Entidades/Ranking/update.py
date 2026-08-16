@@ -3,15 +3,15 @@ import json
 # Importação das funções auxiliares (sem uso de OOP/Classes)
 try:
     from Entidades.Ranking.get_all import get_all
-    from Entidades.Ranking.delete import remove_player
-    from Entidades.Ranking.create import add_player
+    from Entidades.Ranking.remove_player import remove_player
+    from Entidades.Ranking.add_player import add_player
 except ImportError:
     from get_all import get_all
     from delete import remove_player
-    from create import add_player
+    # from create import add_player
 
 
-def atualizar(nickname: str, pontuacao: float):
+def update(nickname: str, pontuacao: float):
 
     try:
         # 1. Busca todos os registros (retorna uma lista de dicionários)

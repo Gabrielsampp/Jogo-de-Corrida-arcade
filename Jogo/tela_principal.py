@@ -7,9 +7,9 @@ import sys
 
 from Jogo.tela_game_over import tela_game_over
 from Jogo.jogo import tela_inicial
-from Jogo.jogo import tela_ranking
+# from Jogo.jogo import tela_ranking
 
-# from Jogo.tela_ranking import tela_ranking
+from Jogo.tela_ranking import tela_ranking
 
 import Jogo.get_images as get_images
 from Entidades.Pista.update import update as pista_update
