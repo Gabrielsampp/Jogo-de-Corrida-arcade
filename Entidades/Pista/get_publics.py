@@ -5,6 +5,6 @@ def get_publics(): #função que retorna todos as pistas registradas no pista.js
     path = Path(__file__).parent / "pista.json"
 
     with open(path, "r", encoding="utf-8") as file:
-        dados = json.load(file)
+        data = json.load(file)
 
-    return [track for track in dados["tracks"] if track["is_public"] == True] #Retorna as pistas marcadas como "true" na opção "is_public"
+    return [track for track in data["tracks"] if track["is_public"] == True] #Retorna as pistas marcadas como "true" na opção "is_public"

@@ -4,14 +4,14 @@ from pathlib import Path
 path = Path(__file__).parent / "ranking.json"
 
 
-def remove_player(name):                                    #função para remover player do ranking
+def remove_player(nickname):                                    #função para remover player do ranking
     with open(path, "r", encoding="utf-8") as file:
         data = json.load(file)
 
     ranking = data["ranking"]
 
     for player in ranking:                                         #busca o nome do jogador no ranking, se encontrar, ele remove do ranking
-        if player["name"] == name:
+        if player["nickname"] == nickname:
             ranking.remove(player)
 
             with open(path, "w", encoding="utf-8") as file:               #alteração do arquivo

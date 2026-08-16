@@ -3,7 +3,7 @@ from pathlib import Path
 
 path = Path(__file__).parent / "ranking.json"
 
-def add_player(name, score):                               #função para adicionar jogador ao ranking
+def add_player(nickname, score):                               #função para adicionar jogador ao ranking
 
     with open(path, "r", encoding="utf-8") as file:
         data = json.load(file)
@@ -11,11 +11,11 @@ def add_player(name, score):                               #função para adicio
     ranking = data["ranking"]
 
     for player in ranking:                              #verifica se o jogador já está no ranking
-        if player["name"] == name: 
+        if player["nickname"] == nickname: 
             return False, "Jogador já existe"
 
     new_player = {                                          #se não estiver, cria um novo jogador 
-        "name": name,
+        "nickname": nickname,
         "score": score
     }
 

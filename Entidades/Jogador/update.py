@@ -19,7 +19,7 @@ def update(nickname, new_data):
 
     # Verifica se é o jogador e subistitui os dados do dicionário com as diferenças da segunda entrada da função.
 
-    for player in data["jogadores"]:
+    for player in data["players"]:
         if player["nickname"] == nickname:
 
             player.update(new_data)

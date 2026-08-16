@@ -9,7 +9,7 @@ def get_last_id():
     data = json.load(file)
 
     try:
-        return data["pistas"][-1]["id"]
+        return data["tracks"][-1]["id"]
 
     except:
         return 0
