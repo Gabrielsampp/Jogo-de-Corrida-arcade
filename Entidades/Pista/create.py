@@ -2,35 +2,43 @@
 
 import json
 from pathlib import Path
-from get_last_id import get_last_id
+from Entidades.Pista.get_last_id import get_last_id
 
-tipos_de_relevo = ["deserto", "asfalto", "antártida", "Campos verdes"] 
+tipos_de_relevo = ["deserto", "asfalto", "antártida", "campos verdes"] 
 
-def cadastrar_pista( #                                       FUNÇÃO PRINCIPAL
+#                                                   FUNÇÃO PRINCIPAL
+def cadastrar_pista(
+    jogador: str,
     nome: str,
     is_public: bool,
-    tipo_relevo: list[str],
+    tipo_relevo: str,
     velocidade: float,
     qtd_obstaculos: int,
     cor: str,
-    caminho_arquivo: str = "Entidades/Pista/pista.json"
+    # caminho_arquivo: str = "Entidades/Pista/pista.json"
 ):
-    if isinstance(tipo_relevo, str): #                      Validação dos tipos de relevo                 
-        if tipo_relevo not in tipos_de_relevo:
-            return (False, f"Tipo de relevo inválido. Permitidos: {tipos_de_relevo}")
-        
-        tipo_relevo = [tipo_relevo]
+    # Relevo                                      Validações de entradas
+    if tipo_relevo.lower() not in tipos_de_relevo:
+        return (False, f"Tipo de relevo inválido. Permitidos: {tipos_de_relevo}")
+    # Velocidade
+    try:
+        velocidade_num = float(velocidade)
+        if velocidade_num <= 0:
+            return (False, "A velocidade deve ser maior que zero.")
+    except (ValueError, TypeError):
+        return (False, "A velocidade precisa ser um número válido (ex: 15.0).")
 
-    elif isinstance(tipo_relevo, list):
-        if not tipo_relevo or not all(r in tipos_de_relevo for r in tipo_relevo):
-            return (False, f"Tipo de relevo inválido. Permitidos: {tipos_de_relevo}")
-        
-    else:
-        return (False, "Formato do tipo de relevo é inválido.")
+    # Obstáculos
+    try:
+        qtd_obstaculos_num = int(qtd_obstaculos)
+        if qtd_obstaculos_num < 0:
+            return (False, "A quantidade de obstáculos não pode ser negativa.")
+    except (ValueError, TypeError):
+        return (False, "A quantidade de obstáculos precisa ser um número inteiro (ex: 5).")
 
     try: #                                                  Manipulação no arquivo
 
-        ultimo = get_last_id() #                            Elaboração de um novo ID
+        ultimo = get_last_id() # Elaboração de um novo ID
         novo_id = (ultimo if ultimo is not None else 0) + 1
 
         nova_pista = { #                                    Novos dados da pista.
@@ -40,13 +48,13 @@ def cadastrar_pista( #                                       FUNÇÃO PRINCIPAL
             "tipo_de_relevo": tipo_relevo,
             "velocidade": float(velocidade),
             "quantidade_obstaculos": int(qtd_obstaculos),
-            "melhor_desempenho": None,
-            "jogador_de_melhor_desempenho": None,
+            "melhor_desempenho": 0,
+            "jogador_de_melhor_desempenho": jogador,
             "carro": str(cor)
         }
-
+        
         dados = {"pistas": []}
-        caminho = Path(caminho_arquivo)
+        caminho = Path(__file__).parent / "pista.json"
 
         # Leitura
         if caminho.exists():
