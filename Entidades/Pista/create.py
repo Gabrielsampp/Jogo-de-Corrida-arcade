@@ -2,19 +2,20 @@
 
 import json
 from pathlib import Path
-from get_last_id import get_last_id
+from Entidades.Pista.get_last_id import get_last_id
 
 tipos_de_relevo = ["deserto", "asfalto", "antártida", "campos verdes"] 
 
 #                                                   FUNÇÃO PRINCIPAL
 def cadastrar_pista(
+    jogador: str,
     nome: str,
     is_public: bool,
     tipo_relevo: str,
     velocidade: float,
     qtd_obstaculos: int,
     cor: str,
-    caminho_arquivo: str = "Entidades/Pista/pista.json"
+    # caminho_arquivo: str = "Entidades/Pista/pista.json"
 ):
     # Relevo                                      Validações de entradas
     if tipo_relevo.lower() not in tipos_de_relevo:
@@ -48,12 +49,12 @@ def cadastrar_pista(
             "velocidade": float(velocidade),
             "quantidade_obstaculos": int(qtd_obstaculos),
             "melhor_desempenho": 0,
-            "jogador_de_melhor_desempenho": "",
+            "jogador_de_melhor_desempenho": jogador,
             "carro": str(cor)
         }
         
         dados = {"pistas": []}
-        caminho = Path(caminho_arquivo)
+        caminho = Path(__file__).parent / "pista.json"
 
         # Leitura
         if caminho.exists():

@@ -1,6 +1,7 @@
 # TELA RANKING - PONTUAÇÃO
 
 import pygame
+import sys
 
 from Entidades.Ranking.get_all import get_all
 from Entidades.Ranking.update import update
@@ -28,7 +29,7 @@ def tela_ranking(tela, jogador, resultado): #       FUNÇÃO PRINCIPAL
     #                                               ELEMENTO ESTÁTICOS
     # Textos 
     texto_titulo = fonte_titulo.render("RANKING - TOP 10", True, (255, 255, 255))
-    texto_resultado = fonte.render(f"Seu resultado: {resultado}", True, (255, 255, 0))
+    texto_resultado = fonte_titulo.render(f"Seu resultado: {resultado}", True, (255, 255, 0))
     texto_adicionar = fonte.render("ADICIONAR AO RANKING", True, (255, 255, 255))
     texto_voltar = fonte.render("VOLTAR", True, (255, 255, 255))
 
@@ -43,6 +44,7 @@ def tela_ranking(tela, jogador, resultado): #       FUNÇÃO PRINCIPAL
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
                 pygame.quit()
+                sys.exit()
                 return
             
             if evento.type == pygame.MOUSEBUTTONDOWN and evento.button == 1: # registro de clique no botão esquedro
@@ -52,7 +54,7 @@ def tela_ranking(tela, jogador, resultado): #       FUNÇÃO PRINCIPAL
                     id_alvo = jogador.get("id") if isinstance(jogador, dict) else jogador
                     novos_dados = {"pontos": resultado}
 
-                    sucesso, mensagem = update(id_alvo, novos_dados)
+                    sucesso, mensagem = update(jogador, resultado)
 
                     if sucesso:
                         ranking = carregar_top10()
@@ -70,25 +72,26 @@ def tela_ranking(tela, jogador, resultado): #       FUNÇÃO PRINCIPAL
         # Título e Resultado do Jogador
         tela.blit(
             texto_titulo,
-            texto_titulo.get_rect(center=(LARGURA // 2, 40))
+            texto_titulo.get_rect(center=(LARGURA // 2, 115))
         )
 
         tela.blit(
             texto_resultado,
-            texto_resultado.get_rect(center=(LARGURA // 2, 500))
+            texto_resultado.get_rect(center=(LARGURA // 2, 550))
         )
 
         # Lista do Top 10 Jogadores
         for i, jogador_ranking in enumerate(ranking):
             texto_jogador = fonte.render(
-                f"{i + 1}º - {jogador_ranking['nome']} - {jogador_ranking['pontos']}",
+                f"{i + 1}º - {jogador_ranking['nickname']} {"- "*(44 - len(jogador_ranking["nickname"]) - len(str(jogador_ranking['score'])))}- {jogador_ranking['score']}",
+                # "- "*49,
                 True,
                 (255, 255, 255)
             )
 
             tela.blit(
                 texto_jogador,
-                texto_jogador.get_rect(center=(LARGURA // 2, 85 + i * 42))
+                texto_jogador.get_rect(center=(LARGURA // 2, 190 + i * 34))
             )
 
         # Botão Adicionar - Verde por padrão | Cinza se clicado

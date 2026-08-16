@@ -6,9 +6,9 @@ import sys
 
 from Jogo.tela_game_over import tela_game_over
 from Jogo.jogo import tela_inicial
-from Jogo.jogo import tela_ranking
+# from Jogo.jogo import tela_ranking
 
-# from Jogo.tela_ranking import tela_ranking
+from Jogo.tela_ranking import tela_ranking
 
 import Jogo.get_images as get_images
 
@@ -136,8 +136,8 @@ def tela_principal( pista=PISTA_DEFAULT ):
                     res = tela_game_over(tela=TELA, melhor_pontuacao="1000", pontuacao="dehrfke", tempo_total=1000)
 
                     while res != "jogar_novamente" and res != "sair":
-                        # tela_ranking(TELA, "jfijowaof", 1000)
-                        tela_ranking(TELA)
+                        tela_ranking(TELA, "maria", 1000)
+                        # tela_ranking(TELA)
                         res = tela_game_over(tela=TELA, melhor_pontuacao="1000", pontuacao="dehrfke", tempo_total=1000)
 
                     match res:
