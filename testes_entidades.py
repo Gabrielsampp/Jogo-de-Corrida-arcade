@@ -18,10 +18,10 @@ try:
     
     print("Tudo certo")'''
 except AssertionError as e:
-    print(e)
+    print(str(e))
 
-except Exception:
-    print(Exception)
+except Exception as e:
+    print(str(e))
 
 
 try:
@@ -32,16 +32,16 @@ try:
     
     print("Tudo certo")'''
 except AssertionError as e:
-    print(e)
+    print(str(e))
 
-except Exception:
-    print(Exception)
+except Exception as e:
+    print(str(e))
 
 
 try:
     '''Pista
     assert len(pista.get_all()) > 0, "Pista/get_all"   # Adicionar tratamento de erro caso o json esteja vazio
-    assert pista.create(name="testePista", is_public=True, landform="asfalto", speed=3, obstacles=7, color="azul")[0] == True, "Pista/create"
+    assert pista.create(name="testePista", is_public=True, landform="asfalto", speed=3, obstacles=7, color="azul", player="teste1")[0] == True, "Pista/create"
     assert pista.delete(pista.get_last_id())[0] == True, "Pista/delete and get_last_id"
     assert pista.update(id=1, new_data={"speed": 2})[0] == True, "Pista/update"
     assert len(pista.get_by_list_id(id_list=[1, 2])) > 0, "Pista/get_by_list_id"
@@ -51,25 +51,9 @@ try:
 except AssertionError as e:
     print(e)
 
-except Exception:
-    print(Exception)
+except Exception as e:
+    print(str(e))
 
-
-try:
-    '''Pista
-    assert len(pista.get_all()) > 0, "Pista/get_all"   # Adicionar tratamento de erro caso o json esteja vazio
-    assert pista.create(name="testePista", is_public=True, landform="asfalto", speed=3, obstacles=7, color="azul")[0] == True, "Pista/create"
-    assert pista.delete(pista.get_last_id())[0] == True, "Pista/delete and get_last_id"
-    assert pista.update(id=1, new_data={"speed": 2})[0] == True, "Pista/update"
-    assert len(pista.get_by_list_id(id_list=[1, 2])) > 0, "Pista/get_by_list_id"
-    assert len(pista.get_publics()) > 0, "Pista/get_publics"        # implementar pathlib
-    
-    print("Tudo certo")'''
-except AssertionError as e:
-    print(e)
-
-except Exception:
-    print(Exception)
 
 
 try:
