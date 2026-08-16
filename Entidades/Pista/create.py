@@ -2,7 +2,7 @@
 
 import json
 from pathlib import Path
-from get_last_id import get_last_id
+from Entidades.Pista.get_last_id import get_last_id
 
 tipos_de_relevo = ["deserto", "asfalto", "antártida", "Campos verdes"] 
 
