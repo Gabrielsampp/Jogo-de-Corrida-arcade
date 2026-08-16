@@ -31,6 +31,10 @@ def tela_pista(create):
     # 1. Armazena os dados textuais recebidos do terminal
     nome_pista, velocidade, obstaculos = coletar_dados_terminal()
 
+ # Inicializa o mixer de áudio do Pygame
+    pygame.mixer.init()
+    pygame.mixer.Sound("Entidades/sons/sound_teste.mp3").play()
+
     # 2. Inicialização do ambiente gráfico
     pygame.init()
     LARGURA, ALTURA = 500, 700
@@ -66,7 +70,7 @@ def tela_pista(create):
         )
 
     botoes_carros = {
-        "roxo":     rect_escalado(65,  140,  80, 128),
+        "roxo":     rect_escalado(62,  140,  80, 128),
         "azul":     rect_escalado(157, 140,  80, 128),
         "verde":    rect_escalado(248, 140,  80, 128),
         "amarelo":  rect_escalado(339, 140,  80, 128),
@@ -74,15 +78,15 @@ def tela_pista(create):
     }
 
     botoes_pistas = {
-        "Campos verdes": rect_escalado(72, 280, 432, 138),  # Faixa Pista 1
-        "deserto":       rect_escalado(72, 426, 432, 138),  # Faixa Pista 2
-        "antártida":     rect_escalado(72, 572, 432, 138),  # Faixa Pista 3
+        "Campos verdes": rect_escalado(72, 285, 432, 138),  # Faixa Pista 1
+        "deserto":       rect_escalado(72, 430, 432, 138),  # Faixa Pista 2
+        "antártida":     rect_escalado(72, 573, 432, 138),  # Faixa Pista 3
         "asfalto":       rect_escalado(72, 718, 432, 138)   # Faixa Pista 4
     }
 
-    btn_publica = rect_escalado(95,  865, 180, 45)
-    btn_privada = rect_escalado(298, 865, 180, 45)
-    btn_criar_sala = rect_escalado(95, 922, 385, 60)
+    btn_publica = rect_escalado(97,  870, 180, 45)
+    btn_privada = rect_escalado(298, 870, 180, 45)
+    btn_criar_sala = rect_escalado(95, 932, 385, 60)
 
     # Configuração visual das bordas vazadas (Cores em RGB)
     COR_HOVER = (0, 255, 255)       # Ciano quando passa o mouse por cima
@@ -129,7 +133,7 @@ def tela_pista(create):
                     elif relevo_selecionada is None:
                         print("Aviso: Selecione uma pista antes de continuar.")
                     else:
-                        # Executa a função passada por parâmetro (seu create)
+                        # Executa a função passada por parâmetro (create)
                         sucesso, mensagem = create(
                             nome=nome_pista,
                             is_public=sala_publica,
