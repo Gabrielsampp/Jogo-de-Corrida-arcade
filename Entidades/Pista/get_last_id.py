@@ -1,7 +1,8 @@
 
 import json
+from pathlib import Path
 
-path = "Entidades/Pista/pista.json"
+path = Path(__file__).parent / "pista.json"
 
 def get_last_id():
     file = open(path, "r", encoding="utf-8")

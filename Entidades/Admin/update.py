@@ -1,5 +1,9 @@
 import json
 
+from pathlib import Path
+
+path = Path(__file__).parent / "admin.json"
+
 def update(new_data):
     valid_fields = ["username", "password"]
 
@@ -10,14 +14,14 @@ def update(new_data):
         if new_data[field] == "":
             return False, "O campo " + field + " não pode ficar vazio"
 
-    file = open("Entidades/Admin/admin.json", "r", encoding="utf-8")
+    file = open(path, "r", encoding="utf-8")
     admin = json.load(file)
     file.close()
 
     for field in new_data:
         admin[field] = new_data[field]
 
-    file = open("Entidades/Admin/admin.json", "w", encoding="utf-8")
+    file = open(path, "w", encoding="utf-8")
     json.dump(admin, file, indent=4, ensure_ascii=False)
     file.close()
 

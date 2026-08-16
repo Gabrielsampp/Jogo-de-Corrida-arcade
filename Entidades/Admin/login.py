@@ -7,10 +7,10 @@ def login(username, password):                           #Função criada para t
     with open(path, "r", encoding="utf-8") as file:
         data = json.load(file)
 
-    admins = data["admins"]
+    admin = data
 
-    for admin in admins:
-        if admin["username"] == username and admin["password"] == password:    #se o usuário e a senha do admin estiverem de acordo com o Json
-            return True
-                                                                                #retorna True
+    
+    if admin["username"] == username and admin["password"] == password:    #se o usuário e a senha do admin estiverem de acordo com o Json
+        return True
+                                                                            #retorna True
     return False

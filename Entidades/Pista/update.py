@@ -1,7 +1,8 @@
 
 import json
+from pathlib import Path
 
-path = "Entidades/Pista/pista.json"     # Caminho do arquivo
+path = Path(__file__).parent / "pista.json"     # Caminho do arquivo
 
 # Função que atualiza os dados de uma pista com base no id;
 def update(id, new_data):

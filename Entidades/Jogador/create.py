@@ -44,7 +44,7 @@ def create(nickname,password):
                 "tracks": [],
             }
             info["players"].append(new_player) #Com o o dicionário criado, adiciona o novo jogador à lista de players
-            with open(path, "w", encoding="utf-8") as arquivo: #Abre o arquivo JSON para escrita com a codificação UTF-8 que permite acentuação e caracteres especiais
+            with open(path, "w", encoding="utf-8") as file: #Abre o arquivo JSON para escrita com a codificação UTF-8 que permite acentuação e caracteres especiais
                 json.dump(info, file, indent=4) #Salva o conteúdo atualizado no arquivo JSON, com indentação de 4 espaços para melhor legibilidade
 
             if get_by_username(nickname) is not None: #Verifica se o jogador foi criado com sucesso
