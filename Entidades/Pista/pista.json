@@ -1,73 +1,73 @@
 {
-    "pistas": [
+    "tracks": [
         {
             "id": 1,
-            "nome": "mudei o nome 2",
+            "name": "mudei o nome 2",
             "is_public": true,
-            "tipo_de_relevo": "Campos verdes",
-            "velocidade": 1,
-            "quantidade_obstaculos": 1,
-            "melhor_desempenho": "1000",
-            "jogador_de_melhor_desempenho": "teste1"
+            "landform": "Campos verdes",
+            "speed": 1,
+            "obstacles": 1,
+            "best_performance": "1000",
+            "best_performance_player": "teste1"
         },
         {
             "id": 2,
-            "nome": "mudei o nome 2",
+            "name": "mudei o nome 2",
             "is_public": true,
-            "tipo_de_relevo": "Campos verdes",
-            "velocidade": 1,
-            "quantidade_obstaculos": 1,
-            "melhor_desempenho": "1000",
-            "jogador_de_melhor_desempenho": "teste1"
+            "landform": "Campos verdes",
+            "speed": 1,
+            "obstacles": 1,
+            "best_performance": "1000",
+            "best_performance_player": "teste1"
         },
         {
             "id": 3,
-            "nome": "mudei o nome 2",
+            "name": "mudei o nome 2",
             "is_public": false,
-            "tipo_de_relevo": "Campos verdes",
-            "velocidade": 1,
-            "quantidade_obstaculos": 1,
-            "melhor_desempenho": "1000",
-            "jogador_de_melhor_desempenho": "teste1"
+            "landform": "Campos verdes",
+            "speed": 1,
+            "obstacles": 1,
+            "best_performance": "1000",
+            "best_performance_player": "teste1"
         },
         {
             "id": 4,
-            "nome": "oi",
+            "name": "oi",
             "is_public": true,
-            "tipo_de_relevo": [
+            "landform": [
                 "Campos verdes"
             ],
-            "velocidade": 23.0,
-            "quantidade_obstaculos": 2,
-            "melhor_desempenho": "",
-            "jogador_de_melhor_desempenho": "",
-            "carro": "verde"
+            "speed": 23.0,
+            "obstacles": 2,
+            "best_performance": "",
+            "best_performance_player": "",
+            "car": "verde"
         },
         {
             "id": 5,
-            "nome": "caio da de costa",
+            "name": "pistapista",
             "is_public": false,
-            "tipo_de_relevo": [
+            "landform": [
                 "Campos verdes"
             ],
-            "velocidade": 13.0,
-            "quantidade_obstaculos": 13,
-            "melhor_desempenho": "",
-            "jogador_de_melhor_desempenho": "",
-            "carro": "roxo"
+            "speed": 13.0,
+            "obstacles": 13,
+            "best_performance": "",
+            "best_performance_player": "",
+            "car": "roxo"
         },
         {
             "id": 6,
-            "nome": "gay",
+            "name": "gay",
             "is_public": true,
-            "tipo_de_relevo": [
+            "landform": [
                 "Campos verdes"
             ],
-            "velocidade": 23.0,
-            "quantidade_obstaculos": 22,
-            "melhor_desempenho": "",
-            "jogador_de_melhor_desempenho": "",
-            "carro": "azul"
+            "speed": 23.0,
+            "obstacles": 22,
+            "best_performance": "",
+            "best_performance_player": "",
+            "car": "azul"
         }
     ]
 }
