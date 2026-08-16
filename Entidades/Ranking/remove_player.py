@@ -1,21 +1,21 @@
 import json
 from pathlib import Path
 
-caminho = Path(__file__).parent / "ranking.json"
+path = Path(__file__).parent / "ranking.json"
 
 
-def remove_player(nome):                                    #função para remover player do ranking
-    with open(caminho, "r", encoding="utf-8") as arquivo:
-        dados = json.load(arquivo)
+def remove_player(name):                                    #função para remover player do ranking
+    with open(path, "r", encoding="utf-8") as file:
+        data = json.load(file)
 
-    ranking = dados["ranking"]
+    ranking = data["ranking"]
 
-    for jogador in ranking:                                         #busca o nome do jogador no ranking, se encontrar, ele remove do ranking
-        if jogador["nome"] == nome:
-            ranking.remove(jogador)
+    for player in ranking:                                         #busca o nome do jogador no ranking, se encontrar, ele remove do ranking
+        if player["name"] == name:
+            ranking.remove(player)
 
-            with open(caminho, "w", encoding="utf-8") as arquivo:               #alteração do arquivo
-                json.dump(dados, arquivo, indent=4, ensure_ascii=False)
+            with open(path, "w", encoding="utf-8") as file:               #alteração do arquivo
+                json.dump(data, file, indent=4, ensure_ascii=False)
 
             return True, "Jogador removido do ranking"
 

@@ -1,17 +1,17 @@
 from pathlib import Path
 import json
 
-def buscar_pistas_por_id (lista_ids):
-    with open("pista.json", "r", encoding= "utf-8") as info_pistas:
-        lista_pistas = json.load(info_pistas)
-        pistas_encontradas = []
+def get_by_list_id (id_list):
+    with open("pista.json", "r", encoding= "utf-8") as info_tracks:
+        tracks_list = json.load(info_tracks)
+        found_tracks = []
     
-        for pista in lista_pistas["pistas"]:
-            if pista["id"] in lista_ids:
-                pistas_encontradas.append(pista)
+        for track in tracks_list["tracks"]:
+            if track["id"] in id_list:
+                found_tracks.append(track)
 
-    return pistas_encontradas
+    return found_tracks
 
-lista_ids = [1, 2]  # Exemplo de lista de IDs
-pistas_encontradas = buscar_pistas_por_id(lista_ids)
-print (pistas_encontradas)
+id_list = [1, 2]  # Exemplo de lista de IDs
+found_tracks = get_by_list_id(id_list)
+print (found_tracks)
