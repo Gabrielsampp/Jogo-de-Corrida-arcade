@@ -3,6 +3,7 @@
 import pygame
 
 from Entidades.Ranking.get_all import get_all
+from Entidades.Ranking.update import update
 
 def tela_ranking(tela, jogador, resultado): #       FUNÇÃO PRINCIPAL
     running = True
@@ -48,8 +49,16 @@ def tela_ranking(tela, jogador, resultado): #       FUNÇÃO PRINCIPAL
 
                 # Clique no Botão Adicionar Pontuação
                 if area_botao_adicionar.collidepoint(evento.pos) and not pontuacao_ja_salva:
-                    ranking = carregar_top10()
-                    pontuacao_ja_salva = True
+                    id_alvo = jogador.get("id") if isinstance(jogador, dict) else jogador
+                    novos_dados = {"pontos": resultado}
+
+                    sucesso, mensagem = update(id_alvo, novos_dados)
+
+                    if sucesso:
+                        ranking = carregar_top10()
+                        pontuacao_ja_salva = True
+                    else:
+                        print(f"Erro ao salvar: {mensagem}")
 
                 # Clique no Botão Voltar
                 if area_botao_voltar.collidepoint(evento.pos):
