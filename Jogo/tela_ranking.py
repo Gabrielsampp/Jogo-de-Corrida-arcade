@@ -52,8 +52,6 @@ def tela_ranking(tela, jogador, resultado): #       FUNÇÃO PRINCIPAL
                 # Clique no Botão Adicionar Pontuação
                 if area_botao_adicionar.collidepoint(evento.pos) and not pontuacao_ja_salva:
                     id_alvo = jogador.get("id") if isinstance(jogador, dict) else jogador
-                    novos_dados = {"pontos": resultado}
-
                     sucesso, mensagem = update(jogador, resultado)
 
                     if sucesso:
