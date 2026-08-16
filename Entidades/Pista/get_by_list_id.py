@@ -1,5 +1,6 @@
 from pathlib import Path
 import json
+import os
 
 path = Path(__file__).parent / "pista.json"
 
