@@ -33,8 +33,8 @@ def tela_pista(create):
 
  # Inicializa o mixer de áudio do Pygame
     pygame.mixer.init()
-    pygame.mixer.Sound("Entidades/sons/sound_teste.mp3").play()
-
+    pygame.mixer.Sound("Sons/try.mp3").play()
+    
     # 2. Inicialização do ambiente gráfico
     pygame.init()
     LARGURA, ALTURA = 500, 700
