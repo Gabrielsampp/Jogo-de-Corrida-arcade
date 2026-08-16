@@ -31,6 +31,10 @@ def tela_pista(create):
     # 1. Armazena os dados textuais recebidos do terminal
     nome_pista, velocidade, obstaculos = coletar_dados_terminal()
 
+ # Inicializa o mixer de áudio do Pygame
+    pygame.mixer.init()
+    pygame.mixer.Sound("Entidades/sons/sound_teste.mp3").play()
+
     # 2. Inicialização do ambiente gráfico
     pygame.init()
     LARGURA, ALTURA = 500, 700

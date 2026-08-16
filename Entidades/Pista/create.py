@@ -4,42 +4,57 @@ import json
 from pathlib import Path
 from Entidades.Pista.get_last_id import get_last_id
 
-landforms = ["deserto", "asfalto", "antártida", "Campos verdes"] 
+land_form = ["deserto", "asfalto", "antártida", "campos verdes"] 
 
-def create( #                                       FUNÇÃO PRINCIPAL
+#                                                   FUNÇÃO PRINCIPAL
+def cadastrar_pista(
+    player: str,
     name: str,
     is_public: bool,
     landform: str,
     speed: float,
     obstacles: int,
     color: str,
-    path_file: str = "Entidades/Pista/pista.json"
+    # caminho_arquivo: str = "Entidades/Pista/pista.json"
 ):
-    if isinstance(landform, str): #                      Validação dos tipos de relevo                 
-        if landform not in landforms:
-            return (False, f"Tipo de relevo inválido. Permitidos: {landforms}")
-    else:
-        return (False, "Formato do tipo de relevo é inválido.")
+    # Relevo                                      Validações de entradas
+    if landform.lower() not in land_form:
+        return (False, f"Tipo de relevo inválido. Permitidos: {land_form}")
+    # Velocidade
+    try:
+        speed_num = float(speed)
+        if speed_num <= 0:
+            return (False, "A velocidade deve ser maior que zero.")
+    except (ValueError, TypeError):
+        return (False, "A velocidade precisa ser um número válido (ex: 15.0).")
+
+    # Obstáculos
+    try:
+        obstacles_num = int(obstacles)
+        if obstacles_num < 0:
+            return (False, "A quantidade de obstáculos não pode ser negativa.")
+    except (ValueError, TypeError):
+        return (False, "A quantidade de obstáculos precisa ser um número inteiro (ex: 5).")
 
     try: #                                                  Manipulação no arquivo
 
-        last = get_last_id() #                            Elaboração de um novo ID
+        last = get_last_id() # Elaboração de um novo ID
         new_id = (last if last is not None else 0) + 1
 
         new_track = { #                                    Novos dados da pista.
             "id": new_id,
             "name": name,
             "is_public": is_public,
-            "tipo_de_relevo": landform,
+            "land_form": landform,
             "speed": float(speed),
             "obstacles": int(obstacles),
-            "best_performance": None,
-            "best_performance_player": None,
+            "best_performance": 0,
+            "best_performance_player": player,
             "car": str(color)
         }
-
-        data = {"tracks": []}
-        path = Path(path_file)
+        
+        data = {"track": []}
+        path = Path(__file__).parent / "pista.json"
 
         # Leitura
         if path.exists():
