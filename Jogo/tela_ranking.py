@@ -8,7 +8,7 @@ from Entidades.Ranking.update import update
 
 def tela_ranking(tela, jogador, resultado): #       FUNÇÃO PRINCIPAL
     running = True
-
+    pygame.init()
     #                                               TAMANHO DA TELA
     LARGURA = 500
     ALTURA = 700
@@ -44,8 +44,8 @@ def tela_ranking(tela, jogador, resultado): #       FUNÇÃO PRINCIPAL
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
                 pygame.quit()
-                sys.exit()
-                return
+                return "sair"
+                # sys.exit()
             
             if evento.type == pygame.MOUSEBUTTONDOWN and evento.button == 1: # registro de clique no botão esquedro
 

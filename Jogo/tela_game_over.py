@@ -1,14 +1,12 @@
 import os
 import pygame
 
-pygame.font.init()
-
 PAINEL_AZUL = (30, 45, 70)
 AMARELO = (255, 205, 90)
 VERMELHO_PONTOS = (220, 40, 40)
 LARANJA_TITULO = (255, 140, 40)
 
-FONTE_VALOR = pygame.font.SysFont("couriernew", 30, bold=True)
+
 
 
 def _caminho_fundo():
@@ -20,14 +18,17 @@ def _caminho_fundo():
     raise FileNotFoundError(f"game_over_fundo.png não encontrado perto de {pasta}")
 
 
-CAMINHO_FUNDO = _caminho_fundo()
-
 
 def formatar_tempo(s):
     return f"{int(s // 3600):02d}:{int(s % 3600 // 60):02d}:{int(s % 60):02d}"
 
 
 def tela_game_over(tela, pontuacao, melhor_pontuacao, tempo_total):
+    pygame.font.init()
+    CAMINHO_FUNDO = _caminho_fundo()
+    FONTE_VALOR = pygame.font.SysFont("couriernew", 30, bold=True)
+
+
     """Retorna 'jogar_novamente' | 'ranking' | 'sair'."""
     largura, altura = tela.get_size()
     fundo = pygame.transform.smoothscale(pygame.image.load(CAMINHO_FUNDO).convert(), (largura, altura))

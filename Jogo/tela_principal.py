@@ -2,34 +2,26 @@
 import pygame
 from pygame.locals import *
 from random import randint
+from random import choice
 from datetime import datetime
+from pathlib import Path
 import sys
 
 from Jogo.tela_game_over import tela_game_over
-from Jogo.jogo import tela_inicial
+# from Jogo.jogo import tela_inicial
 # from Jogo.jogo import tela_ranking
 
+from Jogo.tela_inicial import tela_inicial
 from Jogo.tela_ranking import tela_ranking
 
 import Jogo.get_images as get_images
 from Entidades.Pista.update import update as pista_update
 
-pygame.init()
-pygame.font.init()
-
-FONTE = pygame.font.SysFont("couriernew", 30, bold=True)
 
 # Definindo tela
 LARGURA, ALTURA = 500, 700
-TELA = pygame.display.set_mode((LARGURA, ALTURA))
 
 L_CARRO, A_CARRO = 40, 55
-
-pygame.display.set_caption("Corrida Arcade")
-
-# Taxa de frames
-RELOGIO = pygame.time.Clock()
-FPS = 60
 
 
 # Pista padrão
@@ -48,34 +40,58 @@ PISTA_DEFAULT = {
 
 # Funções auxiliares
 
-def listar_obstaculos(obstaculos_paths, BORDA_ESQUERDA, BORDA_DIREITA):
-    OBSTACULOS = []
-    obstaculo = {}
-
-    image = pygame.image.load(obstaculos_paths[0]).convert_alpha()
-    image = pygame.transform.scale(image, (L_CARRO, A_CARRO))
-
-    obstaculo["image"] = image
-    obstaculo["rect"] = image.get_rect(center=(randint(BORDA_ESQUERDA, BORDA_DIREITA), -50))
-
-    OBSTACULOS.append(obstaculo)
-
-    for obs in obstaculos_paths[1:]:
-        obstaculo = {}
-        image = pygame.image.load(obs).convert_alpha()
-        image = pygame.transform.scale(image, (L_CARRO, A_CARRO))
-
-        obstaculo["image"] = image
-        obstaculo["rect"] = image.get_rect(center=(randint(BORDA_ESQUERDA, BORDA_DIREITA), OBSTACULOS[-1]["rect"].y-180))
-        OBSTACULOS.append(obstaculo)
-
-    return OBSTACULOS
-
+# Loop principal
 
 def tela_principal( pista=PISTA_DEFAULT, jogador="teste1" ):
+    
+    pygame.init()
+    pygame.font.init()
+    pygame.mixer.init()
 
-    tela_inicial(TELA)
+    # Músicas e efeitos sonoros
+    FIM_DA_MUSICA = pygame.USEREVENT + 1
+    pygame.mixer.music.set_endevent(FIM_DA_MUSICA)
+
+    BASEDIR = Path(__file__).parent.parent / "Musicas"
+
+    MUSICAS_DE_FUNDO = [
+        BASEDIR / "back_music1.mp3",
+        BASEDIR / "back_music2.mpeg",
+        BASEDIR / "sound_teste.mp3",
+    ]
+
+    pygame.mixer.music.load( BASEDIR / "game_over.mp3" )
+    pygame.mixer.music.set_volume(0.5)
+    pygame.mixer.music.play()
+
+    def next_music():
+        pygame.mixer.music.load( choice(MUSICAS_DE_FUNDO) )
+        pygame.mixer.music.play()
+
+
+
+    end_game = pygame.mixer.Sound( BASEDIR / "faaah.mp3" )
+    end_game.set_volume(0.8)
+
+
+    FONTE = pygame.font.SysFont("couriernew", 30, bold=True)
+    TELA = pygame.display.set_mode((LARGURA, ALTURA))
+
+    app = tela_inicial(TELA)
+    if app == "sair":
+        return
+
     MOMENTO_INICIAL = datetime.now()
+    pygame.mixer.music.stop()
+    pygame.mixer.music.load( MUSICAS_DE_FUNDO[0] )
+    pygame.mixer.music.play()
+
+    pygame.display.set_caption("Corrida Arcade")
+
+    # Taxa de frames
+    RELOGIO = pygame.time.Clock()
+    FPS = 60
+
 
     bgs_pista = get_images.get_bg_pista(pista["tipo_de_relevo"])
     carro = get_images.get_carro(pista["carro"])
@@ -114,6 +130,30 @@ def tela_principal( pista=PISTA_DEFAULT, jogador="teste1" ):
 
 
     # Obstáculos
+    def listar_obstaculos(obstaculos_paths, BORDA_ESQUERDA, BORDA_DIREITA):
+        OBSTACULOS = []
+        obstaculo = {}
+
+        image = pygame.image.load(obstaculos_paths[0]).convert_alpha()
+        image = pygame.transform.scale(image, (L_CARRO, A_CARRO))
+
+        obstaculo["image"] = image
+        obstaculo["rect"] = image.get_rect(center=(randint(BORDA_ESQUERDA, BORDA_DIREITA), -50))
+
+        OBSTACULOS.append(obstaculo)
+
+        for obs in obstaculos_paths[1:]:
+            obstaculo = {}
+            image = pygame.image.load(obs).convert_alpha()
+            image = pygame.transform.scale(image, (L_CARRO, A_CARRO))
+
+            obstaculo["image"] = image
+            obstaculo["rect"] = image.get_rect(center=(randint(BORDA_ESQUERDA, BORDA_DIREITA), OBSTACULOS[-1]["rect"].y-180))
+            OBSTACULOS.append(obstaculo)
+
+        return OBSTACULOS
+
+
     OBSTACULOS = listar_obstaculos(obstaculos_paths, BORDA_ESQUERDA, BORDA_DIREITA)
 
     running = True
@@ -128,6 +168,9 @@ def tela_principal( pista=PISTA_DEFAULT, jogador="teste1" ):
         PONTOS = 0    
         OBSTACULOS = listar_obstaculos(obstaculos_paths, BORDA_ESQUERDA, BORDA_DIREITA)
         MOMENTO_INICIAL = datetime.now()
+
+        pygame.mixer.music.stop()
+        next_music()
 
         return velocidade, Y_PISTA_1, Y_PISTA_2, PONTOS, OBSTACULOS, MOMENTO_INICIAL
 
@@ -170,6 +213,9 @@ def tela_principal( pista=PISTA_DEFAULT, jogador="teste1" ):
             if event.type == pygame.QUIT:
                 running = False
 
+            if event.type == FIM_DA_MUSICA:
+                next_music()
+
         teclas =  pygame.key.get_pressed()
         # Movimentação horizontal
         if teclas[K_a] or teclas[K_LEFT]:      # Movimenta o player para a esquerda
@@ -181,11 +227,11 @@ def tela_principal( pista=PISTA_DEFAULT, jogador="teste1" ):
                 CARRO_PLAYER_RECT.x += velocidade 
 
         # Movimentação vertical
-        if teclas[K_w] or teclas[K_UP]:      # Movimenta o player para a esquerda
+        if teclas[K_w] or teclas[K_UP]:      # Movimenta o player para cima
             if CARRO_PLAYER_RECT.y > 0:
                 CARRO_PLAYER_RECT.y -= velocidade 
 
-        if teclas[K_s] or teclas[K_DOWN]:      # Movimenta o player para a direita
+        if teclas[K_s] or teclas[K_DOWN]:      # Movimenta o player para baixo
             if CARRO_PLAYER_RECT.y < ALTURA - A_CARRO:
                 CARRO_PLAYER_RECT.y += velocidade 
 
@@ -207,7 +253,7 @@ def tela_principal( pista=PISTA_DEFAULT, jogador="teste1" ):
         # Colisões entre carros
         for obs in OBSTACULOS:
             if CARRO_PLAYER_RECT.colliderect(obs["rect"]):
-
+                end_game.play()
                 if pista["melhor_desempenho"] < PONTOS:
                     if jogador == pista["jogador_de_melhor_desempenho"]:
                         pista_update(pista["id"], { "melhor_desempenho": PONTOS, "jogador_de_melhor_desempenho": jogador} )
@@ -222,11 +268,18 @@ def tela_principal( pista=PISTA_DEFAULT, jogador="teste1" ):
 
                 tempo_total = diferenca.total_seconds()
 
+
+                pygame.mixer.music.stop()
+                pygame.mixer.music.load(BASEDIR / "game_over.mp3")
+                pygame.mixer.music.play()
                 res = tela_game_over(tela=TELA, melhor_pontuacao="1000", pontuacao=PONTOS, tempo_total=tempo_total)
-                
+                CARRO_PLAYER_RECT.x == LARGURA // 2
+                CARRO_PLAYER_RECT.y == ALTURA - 100
 
                 while res != "jogar_novamente" and res != "sair":
-                    tela_ranking(TELA, jogador=jogador, resultado=PONTOS)
+                    app = tela_ranking(TELA, jogador=jogador, resultado=PONTOS)
+                    if app == "sair":
+                        return
                     # tela_ranking(TELA)
                     res = tela_game_over(tela=TELA, melhor_pontuacao="1000", pontuacao=PONTOS, tempo_total=1000)
 
@@ -235,7 +288,9 @@ def tela_principal( pista=PISTA_DEFAULT, jogador="teste1" ):
                         velocidade, Y_PISTA_1, Y_PISTA_2, PONTOS, OBSTACULOS, MOMENTO_INICIAL = reiniciar(obstaculos_paths)
                         
                     case "sair":
-                        tela_inicial(TELA)
+                        app = tela_inicial(TELA)
+                        if app == "sair":
+                            return
                         velocidade, Y_PISTA_1, Y_PISTA_2, PONTOS, OBSTACULOS, MOMENTO_INICIAL = reiniciar(obstaculos_paths)
                     
 
@@ -245,5 +300,4 @@ def tela_principal( pista=PISTA_DEFAULT, jogador="teste1" ):
 
 
     pygame.quit()
-    sys.exit()
 
