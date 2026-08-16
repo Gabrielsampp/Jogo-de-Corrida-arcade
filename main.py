@@ -1,5 +1,13 @@
-from Jogo.tela_ranking import tela_ranking
-from Entidades.Pista.create import cadastrar_pista
+from Jogo.tela_principal import tela_principal as jogo
 
-cadastrar_pista()
-tela_ranking()
+while True:
+    try:
+        jogo()
+        res = input()
+        
+        if res != "":
+            break
+
+    except Exception as e:
+        print(str(e))
+        break 

@@ -3,6 +3,7 @@ import sys
 
 def tela_inicial(TELA):
     running = True
+    pygame.init()
 
     # 1. Carrega a imagem de fundo
     BG_INIT = pygame.image.load("Imagens/bg-tela-inicial.png").convert()
@@ -36,7 +37,8 @@ def tela_inicial(TELA):
             if event.type == pygame.QUIT:
                 running = False
                 pygame.quit()
-                sys.exit()
+                return "sair"
+                # sys.exit()
 
             # Clique do mouse
             if event.type == pygame.MOUSEBUTTONDOWN:
@@ -50,7 +52,8 @@ def tela_inicial(TELA):
                     # Verifica clique no botão Sair
                     if btn_sair_rect.collidepoint(pos_mouse):
                         pygame.quit()
-                        sys.exit()
+                        return "sair"
+                        # sys.exit()
 
             # Tecla ENTER para jogar rápido
             if event.type == pygame.KEYDOWN:
