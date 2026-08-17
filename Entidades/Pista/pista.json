@@ -68,6 +68,28 @@
             "best_performance": "",
             "best_performance_player": "",
             "car": "azul"
+        },
+        {
+            "id": 7,
+            "name": "teste0.2",
+            "is_public": false,
+            "land_form": "Campos verdes",
+            "speed": 32.0,
+            "obstacles": 2,
+            "best_performance": 0,
+            "best_performance_player": "teste",
+            "car": "verde"
+        },
+        {
+            "id": 8,
+            "name": "ww",
+            "is_public": true,
+            "land_form": "antártida",
+            "speed": 22.0,
+            "obstacles": 22,
+            "best_performance": 0,
+            "best_performance_player": "teste",
+            "car": "amarelo"
         }
     ]
 }
