@@ -1,6 +1,6 @@
 import pygame
 import sys 
-from Entidades.Pista.create import cadastrar_pista
+
 def coletar_dados_terminal():
     """Coleta as entradas iniciais obrigatórias via console."""
     print("\n--- CONFIGURAÇÃO DA PISTA via TERMINAL ---")
@@ -8,19 +8,27 @@ def coletar_dados_terminal():
     
     while True:
         try:
-            speed = float(input("Digite a speed (float): "))
-            break
+            speed = float(input("Defina a velocidade (2 á 5 ): "))
+            if speed < 2 or speed > 5:
+                print("Velocidade deve estar entre 2 e 5.")
+            else:
+                break
         except ValueError:
-            print("Entrada inválida. Digite um número decimal.")
+            print("Entrada inválida. Digite um número decimal entre 2 e 5.")
+        
             
     while True:
         try:
-            obstaculos = int(input("Digite a quantidade de obstáculos (int): "))
-            break
+            obstacles = int(input("Defina a quantidade de obstáculos ( 5 á 10 ): "))
+            if obstacles < 5 or obstacles > 10:
+                print("A quantidade de obstáculos deve estar entre 5 e 10.")
+            else:
+                break
         except ValueError:
             print("Entrada inválida. Digite um número inteiro.")
+        
             
-    return name, speed, obstaculos
+    return name, speed, obstacles
 
 
 def tela_pista(create):
@@ -29,7 +37,7 @@ def tela_pista(create):
     Recebe por parâmetro a função de cadastro externa através do argumento 'create'.
     """
     # 1. Armazena os dados textuais recebidos do terminal
-    name_pista, speed, obstaculos = coletar_dados_terminal()
+    name_pista, speed, obstacles = coletar_dados_terminal()
 
  # Inicializa o mixer de áudio do Pygame
     pygame.mixer.init()
@@ -140,10 +148,10 @@ def tela_pista(create):
                             is_public=sala_publica,
                             landform=relevo_selecionada, 
                             speed=speed,
-                            obstacles=obstaculos,
+                            obstacles=obstacles,
                             color=cor_selecionada
                         )
-                        print(f"\n[Retorno do JSON]: {mensagem}")
+                        print(f"\n {mensagem}")
                         
                         # Se gravou com sucesso, encerra a interface gráfica
                         if sucesso:
