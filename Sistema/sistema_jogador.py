@@ -65,48 +65,47 @@ def sistema_jogador(jogador_atual):
                 except ValueError:
                     print("\n[!] Digite um ID numérico válido.")
 
-
         # 2 - CRIAR PISTA
         elif opcao == "2":
             print("\n--- CRIAR NOVA PISTA ---")
 
-            # Solicita as informações via CMD
-            nome_pista = input("Digite o nome da pista: ").strip()
+            nome = input("Digite o nome da pista: ").strip()
 
-            while True:
-                try:
-                    velocidade = float(input("Digite a velocidade (ex: 1.5): "))
-                    break
-                except ValueError:
-                    print("Velocidade inválida. Digite um número decimal.")
+            print("\nOpções de relevo disponíveis: deserto, asfalto, antártida, campos verdes")
+            landform = input("Escolha o tipo de relevo: ").strip()
 
-            while True:
-                try:
-                    obstaculos = int(input("Digite a quantidade de obstáculos: "))
-                    break
-                except ValueError:
-                    print("Quantidade inválida. Digite um número inteiro.")
+            velocidade = input("Digite a velocidade (ex: 15.0): ").strip()
+            obstaculos = input("Digite a quantidade de obstáculos (ex: 5): ").strip()
+            cor = input("Digite a cor do carro: ").strip()
 
-            # Obtém o último ID através do módulo pista
-            ultimo_id = pista.get_last_id()
-            novo_id = ultimo_id + 1
+            publica_input = input("A pista será pública? (s/n): ").strip().lower()
+            is_public = publica_input == "s"
 
-            # Chama a função tela_pista do jogo repassando os parâmetros + (último id + 1)
-            tela_pista(
-                nome=nome_pista,
-                velocidade=velocidade,
-                obstaculos=obstaculos,
-                id=novo_id
+            # Chama a função create do módulo pista
+            sucesso, msg = pista.create(
+                player=nickname,
+                name=nome,
+                is_public=is_public,
+                landform=landform,
+                speed=velocidade,
+                obstacles=obstaculos,
+                color=cor
             )
 
-            # Adiciona o novo ID à lista do jogador e atualiza o cadastro do jogador
-            if "pistas" not in jogador_atual:
-                jogador_atual["pistas"] = []
+            if sucesso:
+                # Recupera o ID que acabou de ser cadastrado
+                novo_id = pista.get_last_id()
 
-            jogador_atual["pistas"].append(novo_id)
-            update(nickname, {"pistas": jogador_atual["pistas"]})
+                if "pistas" not in jogador_atual:
+                    jogador_atual["pistas"] = []
 
-            print(f"\n[+] Pista '{nome_pista}' (ID: {novo_id}) criada e adicionada às suas pistas!")
+                # Vincula o ID à lista do jogador e atualiza no arquivo do jogador
+                jogador_atual["pistas"].append(novo_id)
+                update_jogador(nickname, {"pistas": jogador_atual["pistas"]})
+
+                print(f"\n[+] Sucesso: {msg}")
+            else:
+                print(f"\n[!] Falha ao cadastrar: {msg}")
 
         # 3 - PISTAS DA COMUNIDADE
         elif opcao == "3":
