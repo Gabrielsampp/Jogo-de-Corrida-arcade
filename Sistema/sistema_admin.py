@@ -10,8 +10,12 @@ from Entidades.Ranking.ranking import get_all as get_all_ranking
 from Entidades.Ranking.ranking import delete as delete_ranking
 from Entidades.Ranking.ranking import remove_player as remover_do_ranking
 
-import os
+from Entidades.Jogador import jogador
+from Entidades.Pista import pista
+from Entidades.Admin import admin
+from Entidades.Ranking import ranking
 
+import os
 
 def limpar_tela():
     os.system("cls" if os.name == "nt" else "clear")
@@ -104,3 +108,6 @@ def sistema_admin():
 
         input("\nPressione Enter para continuar...")
         limpar_tela()
+
+if __name__ == "__main__":
+    sistema_admin()
