@@ -43,7 +43,7 @@ def tela_pista(create):
     pygame.mixer.init()
     pygame.mixer.Sound("Musicas/back_music1.mp3").play()
     
-    # 2. Inicialização do ambiente gráfico
+    # Inicialização do ambiente gráfico
     pygame.init()
     LARGURA, ALTURA = 500, 700
     tela = pygame.display.set_mode((LARGURA, ALTURA))
@@ -58,14 +58,14 @@ def tela_pista(create):
         pygame.quit()
         sys.exit()
 
-    # 3. Variáveis de Estado internas para as seleções visuais
+    # Variáveis de Estado internas para as seleções visuais
     cor_selecionada = None          # Receberá a string da cor do carro selecionado
     relevo_selecionada = None       # Receberá a string do tipo de relevo selecionado
     sala_publica = True            # Controle lógico: Pública (True) ou Privada (False)
 
-    # 4. Mapeamento dos retângulos invisíveis de colisão
+    #  Mapeamento dos retângulos invisíveis de colisão
     # As coordenadas originais foram desenhadas para uma imagem de 576x1024;
-    # aqui são reescaladas proporcionalmente para a resolução atual (500x700).
+    # São reescaladas proporcionalmente para a resolução atual (500x700).
     ESCALA_X = LARGURA / 576
     ESCALA_Y = ALTURA / 1024
 
@@ -96,10 +96,10 @@ def tela_pista(create):
     btn_privada = rect_escalado(298, 870, 180, 45)
     btn_criar_sala = rect_escalado(95, 932, 385, 60)
 
-    # Configuração visual das bordas vazadas (Cores em RGB)
-    COR_HOVER = (0, 255, 255)       # Ciano quando passa o mouse por cima
-    COR_FIXA = (255, 215, 0)        # Dourado para fixar o item atualmente selecionado
-
+    # Configuração visual das bordas vazadas 
+    COR_HOVER = (0, 255, 255)       
+    COR_FIXA = (255, 215, 0)        
+    COR_NORMAL = (255, 255, 255)   
     clock = pygame.time.Clock()
     rodando = True
 
@@ -110,7 +110,7 @@ def tela_pista(create):
         # Limpa o frame desenhando a imagem de fundo nativa
         tela.blit(fundo, (0, 0))
 
-        # --- MONITORAMENTO DE EVENTOS DA INTERFACE ---
+        #  MONITORAMENTO DE EVENTOS DA INTERFACE 
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
                 rodando = False
@@ -157,7 +157,7 @@ def tela_pista(create):
                         if sucesso:
                             rodando = False
 
-        # --- PROCESSAMENTO EXCLUSIVO DE CONTORNOS/BORDAS (Apenas linhas vazadas) ---
+        # PROCESSAMENTO EXCLUSIVO DE CONTORNOS 
         
         # Contorno dos Carros
         for cor, rect in botoes_carros.items():
@@ -192,6 +192,7 @@ def tela_pista(create):
 
     pygame.quit()
 
+# If somente para teste local da tela de pista, sem a necessidade de rodar o main.py
 if __name__ == "__main__":
     def create_teste(**kwargs):
         print("Dados recebidos:", kwargs)
