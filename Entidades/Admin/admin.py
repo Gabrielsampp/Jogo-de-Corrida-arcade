@@ -1,3 +1,3 @@
-from Entidades.Admin.get import get 
+from Entidades.Admin.get import get
 from Entidades.Admin.update import update
-from Entidades.Admin.login import login
+from Entidades.Admin.login import login_admin

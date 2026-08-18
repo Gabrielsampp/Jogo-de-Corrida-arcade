@@ -91,9 +91,13 @@ def sistema_jogador(jogador_atual):
                 if "pistas" not in jogador_atual:
                     jogador_atual["pistas"] = []
 
-                jogador_atual["pistas"].append(ultimo_id)
-                update(nickname, jogador_atual)
-                print(f"\n[+] Sucesso: Pista ID {ultimo_id} criada e vinculada ao perfil de {nickname}!")
+                # Vincula o ID à lista do jogador e atualiza no arquivo do jogador
+                jogador_atual["pistas"].append(novo_id)
+                update(nickname, {"pistas": jogador_atual["pistas"]})
+
+                print(f"\n[+] Sucesso: {msg}")
+            else:
+                print(f"\n[!] Falha ao cadastrar: {msg}")
 
         # 3 - PISTAS DA COMUNIDADE
         elif opcao == "3":

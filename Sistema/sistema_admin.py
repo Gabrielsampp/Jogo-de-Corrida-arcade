@@ -10,6 +10,16 @@ from Entidades.Ranking.ranking import get_all as get_all_ranking
 from Entidades.Ranking.ranking import delete as delete_ranking
 from Entidades.Ranking.ranking import remove_player as remover_do_ranking
 
+from Entidades.Jogador import jogador
+from Entidades.Pista import pista
+from Entidades.Admin import admin
+from Entidades.Ranking import ranking
+
+import os
+
+def limpar_tela():
+    os.system("cls" if os.name == "nt" else "clear")
+
 
 def sistema_admin():
     rodando = True
@@ -29,30 +39,40 @@ def sistema_admin():
             print("Opção fora do intervalo (1 a 9).")
             continue
 
-        if opcao == 1:
-            print(get_all_ranking())
+        opcoes_consulta = [
+            (1, get_all_ranking),
+            (2, get_all_jogadores),
+            (3, get_all_pistas),
+        ]
 
-        elif opcao == 2:
-            print(get_all_jogadores())
-
-        elif opcao == 3:
-            print(get_all_pistas())
+        if opcao in (1, 2, 3):
+            for numero, funcao in opcoes_consulta:
+                if opcao == numero:
+                    resultado = funcao()
+                    for jogador in resultado:
+                        for key, item in jogador.items():
+                            print(f"{key}: {item}")
+                    break
 
         elif opcao == 4:
-            nickname = input("Nickname do jogador: ").strip()
-            if not nickname:
+            while True:
+                nickname = input("Nickname do jogador: ").strip()
+                if nickname:
+                    break
                 print("Nickname não pode ser vazio.")
-                continue
+
             if input(f"Remover '{nickname}'? (s/n): ").lower() == "s":
                 print(delete_jogador(nickname))
                 remover_do_ranking(nickname)
 
         elif opcao == 5:
-            try:
-                id_pista = int(input("Id da pista: "))
-            except ValueError:
-                print("Id inválido.")
-                continue
+            while True:
+                entrada = input("Id da pista: ").strip()
+                if entrada.isdigit():
+                    id_pista = int(entrada)
+                    break
+                print("Id inválido, digite apenas números.")
+
             if input(f"Remover pista {id_pista}? (s/n): ").lower() == "s":
                 print(delete_pista(id_pista))
 
@@ -84,3 +104,10 @@ def sistema_admin():
         elif opcao == 9:
             print("Saindo do sistema de admin...")
             rodando = False
+            continue
+
+        input("\nPressione Enter para continuar...")
+        limpar_tela()
+
+if __name__ == "__main__":
+    sistema_admin()
