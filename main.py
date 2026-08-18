@@ -1,13 +1,7 @@
-from Jogo.tela_principal import tela_principal as jogo
+from Sistema.sistema import main_menu
 
-while True:
-    try:
-        jogo()
-        res = input()
-        
-        if res != "":
-            break
+try:
+    main_menu()
+except Exception as e:
+    print(str(e))
 
-    except Exception as e:
-        print(str(e))
-        break 
