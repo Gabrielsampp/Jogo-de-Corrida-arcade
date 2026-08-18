@@ -1,14 +1,14 @@
 import pygame
 import sys 
-
+from Entidades.Pista.create import cadastrar_pista
 def coletar_dados_terminal():
     """Coleta as entradas iniciais obrigatórias via console."""
     print("\n--- CONFIGURAÇÃO DA PISTA via TERMINAL ---")
-    nome = input("Digite o nome da pista: ").strip()
+    name = input("Digite o name da pista: ").strip()
     
     while True:
         try:
-            velocidade = float(input("Digite a velocidade (float): "))
+            speed = float(input("Digite a speed (float): "))
             break
         except ValueError:
             print("Entrada inválida. Digite um número decimal.")
@@ -20,7 +20,7 @@ def coletar_dados_terminal():
         except ValueError:
             print("Entrada inválida. Digite um número inteiro.")
             
-    return nome, velocidade, obstaculos
+    return name, speed, obstaculos
 
 
 def tela_pista(create):
@@ -29,12 +29,12 @@ def tela_pista(create):
     Recebe por parâmetro a função de cadastro externa através do argumento 'create'.
     """
     # 1. Armazena os dados textuais recebidos do terminal
-    nome_pista, velocidade, obstaculos = coletar_dados_terminal()
+    name_pista, speed, obstaculos = coletar_dados_terminal()
 
  # Inicializa o mixer de áudio do Pygame
     pygame.mixer.init()
-    pygame.mixer.Sound("Entidades/sons/sound_teste.mp3").play()
-
+    pygame.mixer.Sound("Musicas/back_music1.mp3").play()
+    
     # 2. Inicialização do ambiente gráfico
     pygame.init()
     LARGURA, ALTURA = 500, 700
@@ -135,12 +135,13 @@ def tela_pista(create):
                     else:
                         # Executa a função passada por parâmetro (create)
                         sucesso, mensagem = create(
-                            nome=nome_pista,
+                            player="teste",
+                            name=name_pista,
                             is_public=sala_publica,
-                            tipo_relevo=[relevo_selecionada], # Converte para lista conforme seu JSON espera
-                            velocidade=velocidade,
-                            qtd_obstaculos=obstaculos,
-                            cor=cor_selecionada
+                            landform=relevo_selecionada, 
+                            speed=speed,
+                            obstacles=obstaculos,
+                            color=cor_selecionada
                         )
                         print(f"\n[Retorno do JSON]: {mensagem}")
                         
