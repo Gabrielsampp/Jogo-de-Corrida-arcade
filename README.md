@@ -144,24 +144,97 @@ O projeto adota uma arquitetura modularizada para facilitar a colaboração via 
 
 ---
 
-## Equipe de Desenvolvimento
+## Equipe de Desenvolvimento e atribuições
 
 ```
 
 Antônio Gabriel Sampaio | @Gabrielsampp
+ - Arquitetura do projeto
+ - Admin / admin
+ - Pista / get_by_list_id
+ - Jogador / create
+ - Ranking / update
+ - Jogo / tela_inicial
+ - Sistema / sistema
 
 Caio de Oliveira Ferreira Sá | @CaioOliveira-456
+ - Ranking / add_player
+ - Admin / login
+ - Pista / get_all
+ - Jogador / get_by_username
+ - Ranking / remove_player
+ - Sistema / menu_inicial
+ - Refatoração (inglês)
 
 Davi Henrique de Oliveira Maia  |  @davibr123
+ - Admin / update
+ - Jogador  / login
+ - Pista / delete
+ - jogo / tela_game_over
+ - Sistema / sistema_admin
 
 José Alisson Dias Costa  |  @Alisson014
+ - Jogador / delete
+ - Pista / update
+ - Pista / get_last_id
+ - Jogo / tela_principal
+ - Revisões de código
+ - Testes
 
 Wanderson Francisco Lobo Almeida  |  @wandersonlobo
+ - Jogador / get_all
+ - Admin / get
+ - Pista / get_publics
+ - Ranking / delete
+ - Ranking / get_all
+ - Jogo / tela_pista
+ - main.py
 
 Wellington Dantas Angelo  |  @Angel0ps
+Pista / create
+ - Jogo / tela_ranking
+ - Pista / pista
+ - Jogador / update
+ - Sistema / sistema_jogador
+ - README.md
 
 ```
 
+---
 
+## 💻 Como Executar
+
+### Clone o repositório em sua máquina
+```bash
+# Via SSH
+git clone git@github.com:Gabrielsampp/Jogo-de-Corrida-arcade.git
+
+# Via HTTPS
+git clone https://github.com/Gabrielsampp/Jogo-de-Corrida-arcade.git
+```
+
+### Dependências
+
+Certifique-se de utilizar uma versão do python entre a 3.8 e a 3.12.10. 
+
+No momento em que este projeto foi desenvolvido, a biblioteca pygame apresentava incompatibilidade com versões do python superiores a 3.12.10.
+
+```bash
+# Para verificar a versão instalada do python:
+python --version
+
+# Instalar biblioteca pygame:
+pip install pygame
+
+# Demais bibliotecas utilizadas, como json, pathlib, datetime e random, são integradas nativamente na instalação padrão do python.
+```
+
+### Execução:
+```bash
+# Certifique-se de estar na pasta raiz do projeto.
+
+python main.py
+
+```
 
 

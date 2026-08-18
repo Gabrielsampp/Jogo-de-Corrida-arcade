@@ -26,15 +26,15 @@ L_CARRO, A_CARRO = 40, 55
 
 # Pista padrão
 PISTA_DEFAULT = {
-    "id": 1,
-    "nome": "mudei o nome 2",
+    "id": 2,
+    "name": "mudei o nome 2",
     "is_public": True,
-    "tipo_de_relevo": "antártida",
-    "velocidade": 1,
-    "quantidade_obstaculos": 7,
-    "melhor_desempenho": 0,
-    "jogador_de_melhor_desempenho": "teste1", 
-    "carro": "azul"
+    "landform": "Campos verdes",
+    "speed": 3,
+    "obstacles": 10,
+    "best_performance": 0,
+    "best_performance_player": "teste1",
+    "car": "azul"
 }
 
 
@@ -92,11 +92,14 @@ def tela_principal( pista=PISTA_DEFAULT, jogador="teste1" ):
     RELOGIO = pygame.time.Clock()
     FPS = 60
 
-
-    bgs_pista = get_images.get_bg_pista(pista["tipo_de_relevo"])
-    carro = get_images.get_carro(pista["carro"])
-    obstaculos_paths = get_images.get_obstaculos(pista["quantidade_obstaculos"])
+    # Buscando informações da pista
+    bgs_pista = get_images.get_bg_pista(pista["landform"])
+    carro = get_images.get_carro(pista["car"])
+    obstaculos_paths = get_images.get_obstaculos(pista["obstacles"])
     quadro_pontos_path = get_images.get_quadro_pontos()
+    
+    # Velocidade
+    velocidade = pista["speed"]
 
     # Imagens
     # --- Pista
@@ -114,9 +117,6 @@ def tela_principal( pista=PISTA_DEFAULT, jogador="teste1" ):
     QUADRO_PONTOS = pygame.image.load(quadro_pontos_path).convert_alpha()
     QUADRO_PONTOS = pygame.transform.scale(QUADRO_PONTOS, (LARGURA, 80))
     QUADRO_PONTOS_RECT = QUADRO_PONTOS.get_rect()
-
-    # Velocidade
-    velocidade = 3
 
     # Posições
     Y_PISTA_1 = 0
@@ -160,7 +160,7 @@ def tela_principal( pista=PISTA_DEFAULT, jogador="teste1" ):
     PONTOS = 0
 
     def reiniciar(obstaculos_paths):
-        velocidade = 3
+        velocidade = pista["speed"]
         Y_PISTA_1 = 0
         Y_PISTA_2 = -ALTURA
         CARRO_PLAYER_RECT.x = LARGURA//2
@@ -196,7 +196,7 @@ def tela_principal( pista=PISTA_DEFAULT, jogador="teste1" ):
                 obs["rect"].y = -180
                 obs["rect"].x = randint(BORDA_ESQUERDA, BORDA_DIREITA)
 
-                PONTOS += 1 + pista["quantidade_obstaculos"] // 5
+                PONTOS += 1 + pista["obstacles"] // 5
 
 
         # Loop infinito da pista
@@ -254,12 +254,12 @@ def tela_principal( pista=PISTA_DEFAULT, jogador="teste1" ):
         for obs in OBSTACULOS:
             if CARRO_PLAYER_RECT.colliderect(obs["rect"]):
                 end_game.play()
-                if pista["melhor_desempenho"] < PONTOS:
-                    if jogador == pista["jogador_de_melhor_desempenho"]:
-                        pista_update(pista["id"], { "melhor_desempenho": PONTOS, "jogador_de_melhor_desempenho": jogador} )
+                if int(pista["best_performance"]) < PONTOS:
+                    if jogador == pista["best_performance_player"]:
+                        pista_update(pista["id"], { "best_performance": PONTOS, "best_performance_player": jogador} )
 
-                    elif jogador != pista["jogador_de_melhor_desempenho"] and pista["is_public"]:
-                        pista_update(pista["id"], { "melhor_desempenho": PONTOS, "jogador_de_melhor_desempenho": jogador} )
+                    elif jogador != pista["best_performance_player"] and pista["is_public"]:
+                        pista_update(pista["id"], { "best_performance": PONTOS, "best_performance_player": jogador} )
                     
 
                 MOMENTO_FINAL = datetime.now()
@@ -272,7 +272,7 @@ def tela_principal( pista=PISTA_DEFAULT, jogador="teste1" ):
                 pygame.mixer.music.stop()
                 pygame.mixer.music.load(BASEDIR / "game_over.mp3")
                 pygame.mixer.music.play()
-                res = tela_game_over(tela=TELA, melhor_pontuacao="1000", pontuacao=PONTOS, tempo_total=tempo_total)
+                res = tela_game_over(tela=TELA, melhor_pontuacao=pista["best_performance"], pontuacao=PONTOS, tempo_total=tempo_total)
                 CARRO_PLAYER_RECT.x == LARGURA // 2
                 CARRO_PLAYER_RECT.y == ALTURA - 100
 
@@ -281,7 +281,7 @@ def tela_principal( pista=PISTA_DEFAULT, jogador="teste1" ):
                     if app == "sair":
                         return
                     # tela_ranking(TELA)
-                    res = tela_game_over(tela=TELA, melhor_pontuacao="1000", pontuacao=PONTOS, tempo_total=1000)
+                    res = tela_game_over(tela=TELA, melhor_pontuacao=pista["best_performance"], pontuacao=PONTOS, tempo_total=1000)
 
                 match res:
                     case "jogar_novamente":
