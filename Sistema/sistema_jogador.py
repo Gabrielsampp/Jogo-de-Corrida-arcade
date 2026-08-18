@@ -8,8 +8,7 @@ RAIZ_PROJETO = Path(__file__).resolve().parent.parent
 if str(RAIZ_PROJETO) not in sys.path:
     sys.path.append(str(RAIZ_PROJETO))
 
-import Entidades.Pista as pista # importando o módulo
-
+from Entidades.Pista import pista # importando o módulo
 from Entidades.Jogador.update import update
 from Entidades.Ranking.get_all import get_all
 from Jogo.tela_pista import tela_pista
