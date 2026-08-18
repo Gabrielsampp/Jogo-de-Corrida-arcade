@@ -101,7 +101,7 @@ def sistema_jogador(jogador_atual):
 
                 # Vincula o ID à lista do jogador e atualiza no arquivo do jogador
                 jogador_atual["pistas"].append(novo_id)
-                update_jogador(nickname, {"pistas": jogador_atual["pistas"]})
+                update(nickname, {"pistas": jogador_atual["pistas"]})
 
                 print(f"\n[+] Sucesso: {msg}")
             else:
