@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 from Entidades.Jogador.jogador import get_all as get_all_jogadores
 from Entidades.Jogador.jogador import delete as delete_jogador
 
@@ -122,4 +120,4 @@ def sistema_admin():
 
 if __name__ == "__main__":
     sistema_admin()
->>>>>>> Stashed changes
+

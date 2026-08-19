@@ -1,17 +1,29 @@
 {
-    "jogadores": [
+    "players": [
         {
             "nickname": "teste1",
-            "senha": "123",
-            "melhor_pontuacao": 0,
-            "pistas": []
-        }
-        ,
+            "password": "123",
+            "best_score": 0,
+            "track": []
+        },
         {
             "nickname": "teste2",
-            "senha": "123",
-            "melhor_pontuacao": 0,
-            "pistas": []
+            "password": "123",
+            "best_score": 0,
+            "track": [],
+            "pistas": [
+                9
+            ]
+        },
+        {
+            "nickname": "davi",
+            "password": "123",
+            "best_score": 0,
+            "tracks": [],
+            "pistas": [
+                11,
+                11
+            ]
         }
     ]
 }

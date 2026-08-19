@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-caminho = Path(__file__).parent / "jogador.json"   # Busca o caminho do arquivo json
+path = Path(__file__).parent / "jogador.json"   # Busca o caminho do arquivo json
 
 
 def get_id_by_nickname(nickname, data):               # Função para buscar a posição do jogador
@@ -13,17 +13,17 @@ def get_id_by_nickname(nickname, data):               # Função para buscar a p
 
 
 def delete(nickname=""):
-    file = open(caminho, 'r', encoding='utf-8')        # Abrindo o arquivo
+    file = open(path, 'r', encoding='utf-8')        # Abrindo o arquivo
     data = json.load(file)                             # Carregando o arquivo em um dicionário.
 
 
-    pos = get_id_by_nickname(nickname, data["jogadores"])                 # Busca indece do jogador
+    pos = get_id_by_nickname(nickname, data["players"])                 # Busca indece do jogador
     file.close()
 
     if pos != -1:
-        data["jogadores"].pop( pos )                            # Removendo jogador
+        data["players"].pop( pos )                            # Removendo jogador
 
-        file = open(caminho, 'w', encoding='utf-8')
+        file = open(path, 'w', encoding='utf-8')
         json.dump(data, file, indent=4, ensure_ascii=False)     # Reescrevendo o arquivo json
 
         file.close()

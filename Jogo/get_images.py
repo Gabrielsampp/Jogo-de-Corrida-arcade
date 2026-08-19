@@ -55,3 +55,7 @@ def get_obstaculos(qtd: int) -> list[Path]:
         obstaculos_escolhidos = random.sample(todas_imagens, k=qtd)
 
     return obstaculos_escolhidos
+
+
+def get_quadro_pontos():
+    return IMAGENS_DIR / "quadro_pontuacao.png"
