@@ -10,7 +10,7 @@ from Entidades.Ranking import ranking
 try:
     '''Jogador
     assert jogador.update(nickname="teste2", new_data={ "password": "1234" }) == True, "Jogador/update"
-    assert jogador.create(nickname="jogador1", password="123") == "Jogador criado com sucesso!", "Jogador/create" # Tem que ajustar a saída dessa função (bool, str)
+    assert 
     assert jogador.delete(nickname="jogador1") == "Jogador removido", "Jogador/delete"      # Tem que ajustar a saída (bool, str)
     assert isinstance(jogador.get_all(), list) and len(jogador.get_all()) > 0, "Jogador/get_all"
     assert jogador.get_by_username(nickname="teste1")["nickname"] == "teste1", "Jogador/get_by_username"
@@ -23,6 +23,7 @@ except AssertionError as e:
 except Exception as e:
     print(str(e))
 
+jogador.create(nickname="jogador1", password="123") == "Jogador criado com sucesso!", "Jogador/create" # Tem que ajustar a saída dessa função (bool, str)
 
 try:
     '''Admin

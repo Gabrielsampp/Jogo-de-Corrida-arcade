@@ -6,18 +6,19 @@ from Entidades.Admin.login import login_admin
 from Sistema.sistema_admin import sistema_admin
 from Sistema.sistema_jogador import sistema_jogador
 
+from Entidades.Jogador import jogador
 
 def main_menu():
 
     while True:
 
-        print("     MENU INICIAL   ")
-        print("====================")
+        print(f"{" "*5}MENU INICIAL{" "*5}")
+        print(f"{"="*20}")
         print("1. Fechar sistema")
         print("2. Logar como adm")
         print("3. Logar como jogador")
         print("4. Ver ranking geral")
-        print("====================")
+        print(f"{"="*20}")
 
         opcao = input("Escolha uma opção: ")
 
@@ -42,7 +43,7 @@ def main_menu():
             print("1. Logar como jogador")
             print("2. Cadastrar como jogador")
 
-            opcao_player = input("Escolha uma opção")
+            opcao_player = input("Escolha uma opção: ")
             if opcao_player == "1":
 
                 print("Login de jogador")
@@ -50,12 +51,12 @@ def main_menu():
                 nickname = input("Nome de usuário: ")
                 password = input("Senha: ")
 
-                resultado = login_player(nickname, password)
+                resultado = login_player(nickname, password)[0]
 
-                if resultado[0]:
+                if resultado:
                     print("Login realizado com sucesso!")
 
-                    jogador_atual = resultado[1]
+                    jogador_atual = jogador.get_by_username(nickname)
 
                     sistema_jogador(jogador_atual)
                 else:
@@ -70,7 +71,7 @@ def main_menu():
 
                 resultado = create(nickname, password)
 
-                print(resultado)
+                # print(resultado)
 
             else:
                 print("Opção inválida.")
@@ -80,11 +81,11 @@ def main_menu():
 
             print("==========RANKING==========")
 
-            for posicao, jogador in enumerate(ranking, start=1):
+            for posicao, player in enumerate(ranking, start=1):
                 print(
                     f"{posicao}º - "
-                    f"{jogador['nickname']} - "
-                    f"{jogador['score']} pontos"
+                    f"{player['nickname']} - "
+                    f"{player['score']} pontos"
                 )
             print("===========================")
 

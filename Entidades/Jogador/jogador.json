@@ -5,13 +5,24 @@
             "password": "123",
             "best_score": 0,
             "track": []
-        }
-        ,
+        },
         {
             "nickname": "teste2",
             "password": "123",
             "best_score": 0,
             "track": []
+        },
+        {
+            "nickname": "jogador1",
+            "password": "123",
+            "best_score": 0,
+            "tracks": []
+        },
+        {
+            "nickname": "alisson",
+            "password": "123",
+            "best_score": 0,
+            "tracks": []
         }
     ]
 }
