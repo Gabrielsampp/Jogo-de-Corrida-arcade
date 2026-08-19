@@ -271,8 +271,8 @@ def sistema_jogador(jogador_atual):
                 print("Nenhuma pontuação registrada ainda.")
             else:
                 for posicao, reg in enumerate(ranking_dados, start=1):
-                    nome_jogador = reg.get("player") or reg.get("nickname", "Anônimo")
-                    score = reg.get("points") if "points" in reg else reg.get("pontos", 0)
+                    nome_jogador = reg.get("nickname")
+                    score = reg.get("score")
                     print(f"{posicao}º Lugar | Jogador: {nome_jogador} | Pontos: {score}")
 
         # 8 - SAIR DO SISTEMA DE JOGADOR
