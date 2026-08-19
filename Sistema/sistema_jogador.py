@@ -58,50 +58,102 @@ def sistema_jogador(jogador_atual):
 
             if escolha == "1":
                 print("\nIniciando Jogo Casual na Pista Padrão...")
-                tela_principal(0)
+
+                pista_padrao = {
+                    "id": 0,
+                    "name": "Pista Padrão (Oficial)",
+                    "is_public": True,
+                    "landform": "Campos verdes",
+                    "speed": 3,
+                    "obstacles": 5,
+                    "best_performance": 0,
+                    "best_performance_player": "",
+                    "car": "azul"
+                }
+
+                print("Pista selecionada:")
+                print(pista_padrao)
+
+                tela_principal(
+                    pista=pista_padrao,
+                    jogador=nickname
+                )
+
 
             elif escolha == "2":
                 try:
                     pista_id = int(input("Informe o ID da pista: "))
-                    pistas_validas = [0] + jogador_atual.get("pistas", [])
-                    if pista_id in pistas_validas:
+
+                    pistas_jogador = pista.get_by_list_id(
+                        jogador_atual.get("pistas", [])
+                    )
+
+                    pista_escolhida = None
+
+                    for p in pistas_jogador:
+                        if p.get("id") == pista_id:
+                            pista_escolhida = p
+                            break
+
+                    if pista_escolhida is not None:
                         print(f"\nIniciando jogo na pista ID {pista_id}...")
-                        tela_principal(pista_id)
+
+                        tela_principal(
+                            pista_escolhida,
+                            jogador=nickname
+                        )
                     else:
                         print("\n[!] Erro: Pista não encontrada na sua lista.")
+
                 except ValueError:
                     print("\n[!] Digite um ID numérico válido.")
 
-            else:
-                print("\n[!] Opção inválida! Escolha 1 ou 2.")
         # 2 - CRIAR PISTA
         elif opcao == "2":
             print("\n--- CRIAR NOVA PISTA ---")
+
             id_anterior = pista.get_last_id() or 0
 
             def callback_cadastro(nickname=nickname, **kwargs):
                 kwargs["player"] = nickname
                 return pista.create(**kwargs)
 
-            # Restauração da tela_pista
             tela_pista(callback_cadastro)
 
             ultimo_id = pista.get_last_id()
-            if ultimo_id and ultimo_id > id_anterior:
+
+            if ultimo_id > id_anterior:
                 if "pistas" not in jogador_atual:
                     jogador_atual["pistas"] = []
 
-                # Vincula o ID à lista do jogador e atualiza no arquivo do jogador
-                jogador_atual["pistas"].append(novo_id)
-                update(nickname, {"pistas": jogador_atual["pistas"]})
+                # Adiciona o ID da nova pista ao jogador
+                jogador_atual["pistas"].append(ultimo_id)
 
-                print(f"\n[+] Sucesso: {msg}")
+                # Salva a lista atualizada
+                sucesso = update(
+                    nickname,
+                    {"pistas": jogador_atual["pistas"]}
+                )
+
+                if sucesso:
+                    print(
+                        f"\n[+] Pista criada com sucesso!"
+                        f"\n    ID da pista: {ultimo_id}"
+                    )
+                else:
+                    print(
+                        "\n[!] A pista foi criada, "
+                        "mas não foi possível atualizar o jogador."
+                    )
+
             else:
-                print(f"\n[!] Falha ao cadastrar: {msg}")
+                print("\n[!] Falha ao cadastrar a pista.")
+
 
         # 3 - PISTAS DA COMUNIDADE
         elif opcao == "3":
             print("\n--- PISTAS DA COMUNIDADE ---")
+
             pistas_publicas = pista.get_publics()
 
             if not pistas_publicas:
@@ -112,23 +164,44 @@ def sistema_jogador(jogador_atual):
                         f"ID: {p.get('id')} | "
                         f"Nome: {p.get('name')} | "
                         f"Criador/Recordista: {p.get('best_performance_player', 'N/A')} | "
-                        f"Pontos: {p.get('best_performance_points', 0)} | "
-                        f"Relevo: {p.get('land_form', 'N/A')} | "
+                        f"Pontos: {p.get('best_performance', 0)} | "
+                        f"Relevo: {p.get('landform', 'N/A')} | "
                         f"Velocidade: {p.get('speed', 'N/A')} | "
                         f"Obstáculos: {p.get('obstacles', 'N/A')}"
                     )
 
                 try:
-                    pista_id = int(input("\nInforme o ID da pista pública para jogar: "))
-                    ids_publicos = [p.get("id") for p in pistas_publicas]
+                    pista_id = int(
+                        input("\nInforme o ID da pista pública para jogar: ")
+                    )
 
-                    if pista_id in ids_publicos:
-                        print(f"\nIniciando jogo na pista pública ID {pista_id}...")
-                        tela_principal(pista_id) # Executa o jogo na pista escolhida
+                    # Procura a pista completa pelo ID
+                    pista_escolhida = None
+
+                    for p in pistas_publicas:
+                        if p.get("id") == pista_id:
+                            pista_escolhida = p
+                            break
+
+                    if pista_escolhida is not None:
+                        print(
+                            f"\nIniciando jogo na pista pública ID {pista_id}..."
+                        )
+
+                        tela_principal(
+                            pista_escolhida,
+                            jogador=nickname
+                        )
+
                     else:
-                        print("\n[!] O ID informado não pertence a uma pista pública.")
+                        print(
+                            "\n[!] O ID informado não pertence "
+                            "a uma pista pública."
+                        )
+
                 except ValueError:
                     print("\n[!] Digite um ID numérico válido.")
+
 
         # 4 - ALTERAR SENHA
         elif opcao == "4":
@@ -149,21 +222,24 @@ def sistema_jogador(jogador_atual):
         # 5 - VER MINHAS PISTAS
         elif opcao == "5":
             print("\n--- MINHAS PISTAS ---")
-            pistas_jogador = pista.get_by_list_id(jogador_atual.get("pistas", []))
+
+            pistas_jogador = pista.get_by_list_id(
+                jogador_atual.get("pistas", [])
+            )
 
             if not pistas_jogador:
                 print("Você ainda não criou nenhuma pista.")
             else:
                 for p in pistas_jogador:
-                    # Captura dos pontos da pista
-                    pontos = p.get("best_performance_points", p.get("pontos", 0))
+                    pontos = p.get("best_performance", 0)
+
                     print(
                         f"ID: {p.get('id')} | "
                         f"Nome: {p.get('name')} | "
-                        f"Pontos: {pontos} | " 
-                        f"Relevo: {p.get('land_form')} | "
-                        f"Velocidade: {p.get('speed')} | "
-                        f"Obstáculos: {p.get('obstacles')}"
+                        f"Pontos: {pontos} | "
+                        f"Relevo: {p.get('landform', 'N/A')} | "
+                        f"Velocidade: {p.get('speed', 'N/A')} | "
+                        f"Obstáculos: {p.get('obstacles', 'N/A')}"
                     )
 
         # 6 - REMOVER PISTA

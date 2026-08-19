@@ -5,13 +5,15 @@
             "password": "123",
             "best_score": 0,
             "track": []
-        }
-        ,
+        },
         {
             "nickname": "teste2",
             "password": "123",
             "best_score": 0,
-            "track": []
+            "track": [],
+            "pistas": [
+                9
+            ]
         }
     ]
 }
