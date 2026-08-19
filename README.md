@@ -70,7 +70,7 @@ Todos os dados de usuários, pistas e rankings são mantidos através de **armaz
 
 * **Linguagem:** Python 3.12.1
 * **Interface Gráfica do Jogo:** Biblioteca Pygame (https://pypi.org/project/pygame/)
-* **Customização do terminal:** Biblioteca Rich (https://pypi.org/project/rich/)
+<!-- * **Customização do terminal:** Biblioteca Rich (https://pypi.org/project/rich/) -->
 * **Persistência de Dados:** Arquivos JSON
 
 ---
@@ -108,13 +108,17 @@ O projeto adota uma arquitetura modularizada para facilitar a colaboração via 
  │    │    └── admin.json
  │    └── 📂 Ranking
  │         ├── ranking.py
+ │         ├── add_player.py
+ │         ├── remove_player.py
  │         ├── get_all.py
  │         ├── update.py
  │         ├── delete.py
  │         └── ranking.json
  ├── 📂 Imagens
+ ├── 📂 Musicas
  ├── 📂 Jogo
  |    ├── jogo.py
+ |    ├── get_images.py
  |    ├── tela_game_over.py
  |    ├── tela_inicial.py
  |    ├── tela_pista.py
@@ -125,8 +129,8 @@ O projeto adota uma arquitetura modularizada para facilitar a colaboração via 
  |    ├── sistema_admin.py
  |    ├── sistema_jogador.py
  |    ├── sistema.py
- |    ├── validar_jogador.py
  ├── main.py  
+ ├── testes_entidades.py  
 ```
 
 ---
@@ -179,6 +183,7 @@ José Alisson Dias Costa  |  @Alisson014
  - Pista / update
  - Pista / get_last_id
  - Jogo / tela_principal
+ - Jogo / get_images
  - Revisões de código
  - Testes
 
