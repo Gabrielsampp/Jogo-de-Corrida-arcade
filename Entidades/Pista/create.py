@@ -37,12 +37,21 @@ def cadastrar_pista( #                                       FUNÇÃO PRINCIPAL
             "id": novo_id,
             "nome": nome,
             "is_public": is_public,
+<<<<<<< Updated upstream
             "tipo_de_relevo": tipo_relevo,
             "velocidade": float(velocidade),
             "quantidade_obstaculos": int(qtd_obstaculos),
             "melhor_desempenho": None,
             "jogador_de_melhor_desempenho": None,
             "carro": str(cor)
+=======
+            "landform": landform,
+            "speed": float(speed),
+            "obstacles": int(obstacles),
+            "best_performance": 0,
+            "best_performance_player": player,
+            "car": str(color)
+>>>>>>> Stashed changes
         }
 
         dados = {"pistas": []}
