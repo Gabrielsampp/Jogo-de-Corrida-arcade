@@ -90,6 +90,17 @@
             "best_performance": 0,
             "best_performance_player": "teste",
             "car": "amarelo"
+        },
+        {
+            "id": 9,
+            "name": "A PISTA MAIS DIFÍCIL DO MUNDO!",
+            "is_public": true,
+            "land_form": "Campos verdes",
+            "speed": 10.0,
+            "obstacles": 10,
+            "best_performance": 0,
+            "best_performance_player": "teste2",
+            "car": "amarelo"
         }
     ]
 }

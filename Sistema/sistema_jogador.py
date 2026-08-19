@@ -65,7 +65,7 @@ def sistema_jogador(jogador_atual):
                     "is_public": True,
                     "landform": "Campos verdes",
                     "speed": 3,
-                    "obstacles": 10,
+                    "obstacles": 5,
                     "best_performance": 0,
                     "best_performance_player": "",
                     "car": "azul"
