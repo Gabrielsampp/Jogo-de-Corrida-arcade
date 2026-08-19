@@ -25,10 +25,19 @@ def sistema_admin():
     rodando = True
 
     while rodando:
-        print("\n1-Ranking  2-Jogadores  3-Pistas  4-Remover jogador")
-        print("5-Remover pista  6-Remover do ranking  7-Limpar ranking")
-        print("8-Atualizar admin  9-Sair")
-
+        print("=" * 40)
+        print("         PAINEL DE ADMINSTRAÇÃO")
+        print("=" * 40)
+        print("1 - Ranking")
+        print("2 - Jogadores")
+        print("3 - Pistas")
+        print("4 - Remover jogador")
+        print("5 - Remover pista")
+        print("6 - Remover do ranking")
+        print("7 - Limpar ranking")
+        print("8 - Atualizar admin")
+        print("9 - Sair")
+        print("=" * 40)
         try:
             opcao = int(input("Escolha uma opção: "))
         except ValueError:
@@ -111,3 +120,4 @@ def sistema_admin():
 
 if __name__ == "__main__":
     sistema_admin()
+

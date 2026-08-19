@@ -45,12 +45,13 @@ def cadastrar_pista(
             "id": new_id,
             "name": name,
             "is_public": is_public,
-            "land_form": landform,
+            "landform": landform,
             "speed": float(speed),
             "obstacles": int(obstacles),
             "best_performance": 0,
             "best_performance_player": player,
             "car": str(color)
+
         }
         
         data = {"track": []}

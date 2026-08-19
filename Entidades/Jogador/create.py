@@ -10,7 +10,7 @@ def create(nickname,password):
     nickname = nickname.strip()
     if len(nickname) < 1:
         Valid_nickname = False
-    elif len(nickname) > 10:
+    elif len(nickname) > 20:
         Valid_nickname = False
     else:
         Valid_nickname = True
