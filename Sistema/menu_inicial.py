@@ -1,6 +1,7 @@
 import time
 from Entidades.Ranking.get_all import get_all
 from Entidades.Jogador.login import login_player
+from Entidades.Jogador.create import create
 from Entidades.Admin.login import login_admin
 from Sistema.sistema_admin import sistema_admin
 from Sistema.sistema_jogador import sistema_jogador
@@ -36,26 +37,48 @@ def main_menu():
                 print("Usuário ou senha incorretos.")
 
         elif opcao == "3":
-            print("Login de jogador")
 
-            nickname = input("Nome de usuário: ")
-            password = input("Senha: ")
+            print("Escolha uma opção:")
+            print("1. Logar como jogador")
+            print("2. Cadastrar como jogador")
 
-            resultado = login_player(nickname, password)
+            opcao_player = input("Escolha uma opção")
+            if opcao_player == "1":
 
-            if resultado[0]:
-                print("Login realizado com sucesso!")
+                print("Login de jogador")
 
-                jogador_atual = resultado[1]
+                nickname = input("Nome de usuário: ")
+                password = input("Senha: ")
 
-                sistema_jogador(jogador_atual)
+                resultado = login_player(nickname, password)
+
+                if resultado[0]:
+                    print("Login realizado com sucesso!")
+
+                    jogador_atual = resultado[1]
+
+                    sistema_jogador(jogador_atual)
+                else:
+                    print("Usuário ou senha incorretos.")
+
+            elif opcao_player == "2":
+
+                print("Cadastro de jogador")
+
+                nickname = input("Escolha um nickname: ")
+                password = input("Escolha uma senha: ")
+
+                resultado = create(nickname, password)
+
+                print(resultado)
+
             else:
-                print("Usuário ou senha incorretos.")
+                print("Opção inválida.")
 
         elif opcao == "4":
             ranking = get_all()
 
-            print("\n==========RANKING==========")
+            print("==========RANKING==========")
 
             for posicao, jogador in enumerate(ranking, start=1):
                 print(
@@ -63,7 +86,7 @@ def main_menu():
                     f"{jogador['nickname']} - "
                     f"{jogador['score']} pontos"
                 )
-            print("===========================\n")
+            print("===========================")
 
         else:
             print("Opção inválida.")

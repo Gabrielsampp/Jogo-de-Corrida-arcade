@@ -1,6 +1,6 @@
 import pygame
 import sys 
-from Entidades.Pista.create import cadastrar_pista
+
 def coletar_dados_terminal():
     """Coleta as entradas iniciais obrigatórias via console."""
     print("\n--- CONFIGURAÇÃO DA PISTA via TERMINAL ---")
@@ -8,19 +8,27 @@ def coletar_dados_terminal():
     
     while True:
         try:
-            speed = float(input("Digite a speed (float): "))
-            break
+            speed = float(input("Defina a velocidade (2 á 5 ): "))
+            if speed < 2 or speed > 5:
+                print("Velocidade deve estar entre 2 e 5.")
+            else:
+                break
         except ValueError:
-            print("Entrada inválida. Digite um número decimal.")
+            print("Entrada inválida. Digite um número decimal entre 2 e 5.")
+        
             
     while True:
         try:
-            obstaculos = int(input("Digite a quantidade de obstáculos (int): "))
-            break
+            obstacles = int(input("Defina a quantidade de obstáculos ( 5 á 10 ): "))
+            if obstacles < 5 or obstacles > 10:
+                print("A quantidade de obstáculos deve estar entre 5 e 10.")
+            else:
+                break
         except ValueError:
             print("Entrada inválida. Digite um número inteiro.")
+        
             
-    return name, speed, obstaculos
+    return name, speed, obstacles
 
 
 def tela_pista(create):
@@ -29,13 +37,13 @@ def tela_pista(create):
     Recebe por parâmetro a função de cadastro externa através do argumento 'create'.
     """
     # 1. Armazena os dados textuais recebidos do terminal
-    name_pista, speed, obstaculos = coletar_dados_terminal()
+    name_pista, speed, obstacles = coletar_dados_terminal()
 
  # Inicializa o mixer de áudio do Pygame
     pygame.mixer.init()
     pygame.mixer.Sound("Musicas/back_music1.mp3").play()
     
-    # 2. Inicialização do ambiente gráfico
+    # Inicialização do ambiente gráfico
     pygame.init()
     LARGURA, ALTURA = 500, 700
     tela = pygame.display.set_mode((LARGURA, ALTURA))
@@ -50,14 +58,14 @@ def tela_pista(create):
         pygame.quit()
         sys.exit()
 
-    # 3. Variáveis de Estado internas para as seleções visuais
+    # Variáveis de Estado internas para as seleções visuais
     cor_selecionada = None          # Receberá a string da cor do carro selecionado
     relevo_selecionada = None       # Receberá a string do tipo de relevo selecionado
     sala_publica = True            # Controle lógico: Pública (True) ou Privada (False)
 
-    # 4. Mapeamento dos retângulos invisíveis de colisão
+    #  Mapeamento dos retângulos invisíveis de colisão
     # As coordenadas originais foram desenhadas para uma imagem de 576x1024;
-    # aqui são reescaladas proporcionalmente para a resolução atual (500x700).
+    # São reescaladas proporcionalmente para a resolução atual (500x700).
     ESCALA_X = LARGURA / 576
     ESCALA_Y = ALTURA / 1024
 
@@ -88,10 +96,10 @@ def tela_pista(create):
     btn_privada = rect_escalado(298, 870, 180, 45)
     btn_criar_sala = rect_escalado(95, 932, 385, 60)
 
-    # Configuração visual das bordas vazadas (Cores em RGB)
-    COR_HOVER = (0, 255, 255)       # Ciano quando passa o mouse por cima
-    COR_FIXA = (255, 215, 0)        # Dourado para fixar o item atualmente selecionado
-
+    # Configuração visual das bordas vazadas 
+    COR_HOVER = (0, 255, 255)       
+    COR_FIXA = (255, 215, 0)        
+    COR_NORMAL = (255, 255, 255)   
     clock = pygame.time.Clock()
     rodando = True
 
@@ -102,7 +110,7 @@ def tela_pista(create):
         # Limpa o frame desenhando a imagem de fundo nativa
         tela.blit(fundo, (0, 0))
 
-        # --- MONITORAMENTO DE EVENTOS DA INTERFACE ---
+        #  MONITORAMENTO DE EVENTOS DA INTERFACE 
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
                 rodando = False
@@ -140,16 +148,16 @@ def tela_pista(create):
                             is_public=sala_publica,
                             landform=relevo_selecionada, 
                             speed=speed,
-                            obstacles=obstaculos,
+                            obstacles=obstacles,
                             color=cor_selecionada
                         )
-                        print(f"\n[Retorno do JSON]: {mensagem}")
+                        print(f"\n {mensagem}")
                         
                         # Se gravou com sucesso, encerra a interface gráfica
                         if sucesso:
                             rodando = False
 
-        # --- PROCESSAMENTO EXCLUSIVO DE CONTORNOS/BORDAS (Apenas linhas vazadas) ---
+        # PROCESSAMENTO EXCLUSIVO DE CONTORNOS 
         
         # Contorno dos Carros
         for cor, rect in botoes_carros.items():
@@ -184,6 +192,7 @@ def tela_pista(create):
 
     pygame.quit()
 
+# If somente para teste local da tela de pista, sem a necessidade de rodar o main.py
 if __name__ == "__main__":
     def create_teste(**kwargs):
         print("Dados recebidos:", kwargs)
