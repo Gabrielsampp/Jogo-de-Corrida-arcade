@@ -172,6 +172,7 @@ Davi Henrique de Oliveira Maia  |  @davibr123
  - Pista / delete
  - jogo / tela_game_over
  - Sistema / sistema_admin
+ - Imagens
 
 José Alisson Dias Costa  |  @Alisson014
  - Jogador / delete

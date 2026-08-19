@@ -112,6 +112,17 @@
             "best_performance": 0,
             "best_performance_player": "teste",
             "car": "vermelho"
+        },
+        {
+            "id": 11,
+            "name": "Mass",
+            "is_public": true,
+            "land_form": "antártida",
+            "speed": 5.0,
+            "obstacles": 10,
+            "best_performance": 0,
+            "best_performance_player": "davi",
+            "car": "vermelho"
         }
     ]
 }
