@@ -17,7 +17,7 @@
             "landform": "Campos verdes",
             "speed": 1,
             "obstacles": 1,
-            "best_performance": "1000",
+            "best_performance": 18,
             "best_performance_player": "teste1"
         },
         {
@@ -93,14 +93,25 @@
         },
         {
             "id": 9,
-            "name": "A PISTA MAIS DIFÍCIL DO MUNDO!",
-            "is_public": true,
-            "land_form": "Campos verdes",
-            "speed": 10.0,
-            "obstacles": 10,
+            "name": "teste.03",
+            "is_public": false,
+            "land_form": "asfalto",
+            "speed": 2.0,
+            "obstacles": 5,
             "best_performance": 0,
-            "best_performance_player": "teste2",
-            "car": "amarelo"
+            "best_performance_player": "teste",
+            "car": "azul"
+        },
+        {
+            "id": 10,
+            "name": "teste.04",
+            "is_public": true,
+            "land_form": "asfalto",
+            "speed": 4.0,
+            "obstacles": 6,
+            "best_performance": 0,
+            "best_performance_player": "teste",
+            "car": "vermelho"
         }
     ]
 }
