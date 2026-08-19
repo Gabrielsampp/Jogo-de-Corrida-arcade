@@ -1,6 +1,8 @@
 import pygame
 import sys 
 
+from pathlib import Path
+
 def coletar_dados_terminal():
     """Coleta as entradas iniciais obrigatórias via console."""
     print("\n--- CONFIGURAÇÃO DA PISTA via TERMINAL ---")
@@ -40,8 +42,9 @@ def tela_pista(create):
     name_pista, speed, obstacles = coletar_dados_terminal()
 
  # Inicializa o mixer de áudio do Pygame
+    pathMUS = Path(__file__).parent.parent / "Musicas"
     pygame.mixer.init()
-    pygame.mixer.Sound("Musicas/back_music1.mp3").play()
+    pygame.mixer.Sound(pathMUS / "back_music1.mp3").play()
     
     # Inicialização do ambiente gráfico
     pygame.init()
@@ -50,8 +53,9 @@ def tela_pista(create):
     pygame.display.set_caption("Selecionar Pista")
     
     # Carrega a imagem enviada como plano de fundo
+    pathBG = Path(__file__).parent.parent / "Imagens"
     try:
-        fundo = pygame.image.load("Imagens/tela_pista.png")
+        fundo = pygame.image.load(pathBG / "tela_pista.png")
         fundo = pygame.transform.scale(fundo, (LARGURA, ALTURA))
     except FileNotFoundError:
         print("Erro crítico: Arquivo 'tela_pista.png' não encontrado no diretório.")

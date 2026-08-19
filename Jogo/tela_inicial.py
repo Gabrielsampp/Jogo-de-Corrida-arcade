@@ -1,12 +1,16 @@
 import pygame
 import sys
 
+from pathlib import Path
+
 def tela_inicial(TELA):
     running = True
     pygame.init()
 
+    path = Path(__file__).parent.parent / "Imagens"
+
     # 1. Carrega a imagem de fundo
-    BG_INIT = pygame.image.load("Imagens/bg-tela-inicial.png").convert()
+    BG_INIT = pygame.image.load(path / "bg-tela-inicial.png").convert()
     BG_INIT = pygame.transform.scale(BG_INIT, (500, 700))
 
     # 2. Configura a fonte e as áreas (retângulos) dos botões

@@ -3,6 +3,8 @@
 import pygame
 import sys
 
+from pathlib import Path
+
 from Entidades.Ranking.get_all import get_all
 from Entidades.Ranking.update import update
 
@@ -13,7 +15,9 @@ def tela_ranking(tela, jogador, resultado): #       FUNÇÃO PRINCIPAL
     LARGURA = 500
     ALTURA = 700
 
-    BG_INIT = pygame.image.load("Imagens/tela_ranking.png").convert()
+    pathBg = Path(__file__).parent.parent / "Imagens"
+
+    BG_INIT = pygame.image.load( pathBg / "tela_ranking.png").convert()
     BG_INIT = pygame.transform.scale(BG_INIT, (LARGURA, ALTURA))
     
     fonte_titulo = pygame.font.Font(None, 30)

@@ -2,127 +2,58 @@
     "tracks": [
         {
             "id": 1,
-            "name": "mudei o nome 2",
+            "name": "Mass",
             "is_public": true,
-            "landform": "Campos verdes",
-            "speed": 1,
-            "obstacles": 1,
-            "best_performance": "1000",
-            "best_performance_player": "teste1"
+            "landform": "antártida",
+            "speed": 5.0,
+            "obstacles": 10,
+            "best_performance": 60,
+            "best_performance_player": "davi",
+            "car": "vermelho"
         },
         {
             "id": 2,
-            "name": "mudei o nome 2",
+            "name": "Gp Rio",
             "is_public": true,
-            "landform": "Campos verdes",
-            "speed": 1,
-            "obstacles": 1,
-            "best_performance": 18,
-            "best_performance_player": "teste1"
+            "landform": "asfalto",
+            "speed": 4.0,
+            "obstacles": 7,
+            "best_performance": 80,
+            "best_performance_player": "Alisson",
+            "car": "azul"
         },
         {
             "id": 3,
-            "name": "mudei o nome 2",
-            "is_public": false,
+            "name": "Gp master",
+            "is_public": true,
             "landform": "Campos verdes",
-            "speed": 1,
-            "obstacles": 1,
-            "best_performance": "1000",
-            "best_performance_player": "teste1"
+            "speed": 3.0,
+            "obstacles": 7,
+            "best_performance": 68,
+            "best_performance_player": "Alisson",
+            "car": "verde"
         },
         {
             "id": 4,
-            "name": "oi",
+            "name": "Caio na pista",
             "is_public": true,
-            "landform": [
-                "Campos verdes"
-            ],
-            "speed": 23.0,
-            "obstacles": 2,
-            "best_performance": "",
-            "best_performance_player": "",
-            "car": "verde"
-        },
-        {
-            "id": 5,
-            "name": "pistapista",
-            "is_public": false,
-            "landform": [
-                "Campos verdes"
-            ],
-            "speed": 13.0,
-            "obstacles": 13,
-            "best_performance": "",
-            "best_performance_player": "",
-            "car": "roxo"
-        },
-        {
-            "id": 6,
-            "name": "gay",
-            "is_public": true,
-            "landform": [
-                "Campos verdes"
-            ],
-            "speed": 23.0,
-            "obstacles": 22,
-            "best_performance": "",
-            "best_performance_player": "",
-            "car": "azul"
-        },
-        {
-            "id": 7,
-            "name": "teste0.2",
-            "is_public": false,
-            "land_form": "Campos verdes",
-            "speed": 32.0,
-            "obstacles": 2,
-            "best_performance": 0,
-            "best_performance_player": "teste",
-            "car": "verde"
-        },
-        {
-            "id": 8,
-            "name": "ww",
-            "is_public": true,
-            "land_form": "antártida",
-            "speed": 22.0,
-            "obstacles": 22,
-            "best_performance": 0,
-            "best_performance_player": "teste",
+            "landform": "deserto",
+            "speed": 3.0,
+            "obstacles": 8,
+            "best_performance": 58,
+            "best_performance_player": "Caio",
             "car": "amarelo"
         },
         {
-            "id": 9,
-            "name": "teste.03",
+            "id": 5,
+            "name": "Gp Gp",
             "is_public": false,
-            "land_form": "asfalto",
-            "speed": 2.0,
-            "obstacles": 5,
-            "best_performance": 0,
-            "best_performance_player": "teste",
-            "car": "azul"
-        },
-        {
-            "id": 10,
-            "name": "teste.04",
-            "is_public": true,
-            "land_form": "asfalto",
+            "landform": "antártida",
             "speed": 4.0,
-            "obstacles": 6,
-            "best_performance": 0,
-            "best_performance_player": "teste",
-            "car": "vermelho"
-        },
-        {
-            "id": 11,
-            "name": "Mass",
-            "is_public": true,
-            "land_form": "antártida",
-            "speed": 5.0,
-            "obstacles": 10,
-            "best_performance": 0,
-            "best_performance_player": "davi",
-            "car": "vermelho"
+            "obstacles": 7,
+            "best_performance": 242,
+            "best_performance_player": "Alisson",
+            "car": "azul"
         }
     ]
 }

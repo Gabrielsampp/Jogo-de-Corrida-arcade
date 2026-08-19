@@ -71,7 +71,7 @@ def main_menu():
 
                 resultado = create(nickname, password)
 
-                # print(resultado)
+                print(resultado)
 
             else:
                 print("Opção inválida.")

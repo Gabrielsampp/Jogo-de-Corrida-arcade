@@ -1,28 +1,41 @@
 {
     "players": [
         {
-            "nickname": "teste1",
-            "password": "123",
-            "best_score": 0,
-            "track": []
-        },
-        {
-            "nickname": "teste2",
-            "password": "123",
-            "best_score": 0,
-            "track": [],
-            "pistas": [
-                9
-            ]
-        },
-        {
             "nickname": "davi",
             "password": "123",
             "best_score": 0,
             "tracks": [],
             "pistas": [
                 11,
-                11
+                11,
+                1
+            ],
+            "senha": "123"
+        },
+        {
+            "nickname": "alisson",
+            "password": "123",
+            "best_score": 0,
+            "tracks": []
+        },
+        {
+            "nickname": "Alisson",
+            "password": "123",
+            "best_score": 0,
+            "tracks": [],
+            "pistas": [
+                2,
+                3,
+                5
+            ]
+        },
+        {
+            "nickname": "Caio",
+            "password": "123",
+            "best_score": 0,
+            "tracks": [],
+            "pistas": [
+                4
             ]
         }
     ]

@@ -148,7 +148,7 @@ def tela_principal( pista=PISTA_DEFAULT, jogador="teste1" ):
             image = pygame.transform.scale(image, (L_CARRO, A_CARRO))
 
             obstaculo["image"] = image
-            obstaculo["rect"] = image.get_rect(center=(randint(BORDA_ESQUERDA, BORDA_DIREITA), OBSTACULOS[-1]["rect"].y-180))
+            obstaculo["rect"] = image.get_rect(center=(randint(BORDA_ESQUERDA, BORDA_DIREITA), OBSTACULOS[-1]["rect"].y-200))
             OBSTACULOS.append(obstaculo)
 
         return OBSTACULOS
